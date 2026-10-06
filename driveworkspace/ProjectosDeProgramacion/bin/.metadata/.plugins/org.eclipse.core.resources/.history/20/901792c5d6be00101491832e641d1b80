@@ -1,0 +1,25 @@
+package boletin2Tablas;
+
+import java.util.Scanner;
+
+import funcionesImportantes.FuncionesBasicas;
+import funcionesImportantes.FuncionesTablas;
+
+public class Ejercicio7 {
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		int[][] alumnosYNotas = FuncionesTablas.matrizesBidimensionales(5, 3);
+		for (int iteradorj = 0; iteradorj < alumnosYNotas.length; iteradorj++) {
+			int sumaNotaTrimestral = 0;
+			for (int iteradori = 0; iteradori < alumnosYNotas[iteradorj].length; iteradori++) {
+				System.out.println("La nota del alumno " + alumnosYNotas[iteradorj] + " En el trimestre " + iteradori
+						+ " Es " + alumnosYNotas[iteradorj][iteradori]);
+				sumaNotaTrimestral += alumnosYNotas[iteradorj][iteradori];
+			}
+			float mediaTrimestral = FuncionesBasicas.calculoDeMedia(sumaNotaTrimestral, alumnosYNotas[0].length);
+			System.out.println("La media del trimestre " + alumnosYNotas[iteradorj] + " Es " + mediaTrimestral);
+		}
+		sc.close();
+	}
+}

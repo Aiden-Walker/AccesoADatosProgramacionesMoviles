@@ -1,0 +1,14 @@
+package ejTurnosEntre3;
+
+public class Unc {
+
+	public static void main(String[] args) {
+		SkibidiThread hilo1 = new SkibidiThread("Hilo1");
+		SkibidiThread hilo2 = new SkibidiThread("Hilo2");
+		SkibidiThread hilo3 = new SkibidiThread("Hilo3");
+		hilo1.start();
+		hilo2.start();
+		hilo3.start();
+	}
+
+}

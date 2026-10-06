@@ -1,0 +1,10 @@
+1776756382840	Convert local variable 'radiob3' to field
+1776756415981	Convert local variable 'btnNewButton' to field
+1776756437382	Convert local variable 'buttonCancel' to field
+1776758796618	Convert local variable 'comboBoxTipoPok' to field
+1776761416337	Convert local variable 'comboFight2' to field
+1776761435364	Convert local variable 'comboFight1' to field
+1776763146382	Rename local variable 'mínimo'
+1776763173252	Rename local variable 'mínimo'
+1776794945629	Convert local variable 'botonGuardarCombate' to field
+1776795112185	Convert local variable 'botonCancelarCombate' to field

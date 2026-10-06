@@ -1,0 +1,10 @@
+package tarea1POO;
+
+public class Bombilla {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

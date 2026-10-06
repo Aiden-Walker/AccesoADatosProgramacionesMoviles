@@ -1,0 +1,87 @@
+package tarea1POO;
+
+public class Texto {
+	private String cadena;
+	private int longitudMaxima;
+
+	/**
+	 * @return the cadena
+	 */
+	public String getCadena() {
+		return cadena;
+	}
+
+	/**
+	 * @param cadena the cadena to set
+	 */
+	public void setCadena(String cadena) {
+		this.cadena = cadena;
+	}
+
+	/**
+	 * @return the longitudMaxima
+	 */
+	public int getLongitudMaxima() {
+		return longitudMaxima;
+	}
+
+	/**
+	 * @param longitudMaxima the longitudMaxima to set
+	 */
+	public void setLongitudMaxima(int longitudMaxima) {
+		this.longitudMaxima = longitudMaxima;
+	}
+
+	@Override
+	public String toString() {
+		return "Texto [cadena=" + cadena + ", longitudMaxima=" + longitudMaxima + "]";
+	}
+
+	public Texto(String cadena, int longitudMaxima) {
+		super();
+		this.cadena = cadena;
+		this.longitudMaxima = longitudMaxima;
+	}
+
+	public boolean anyadirCaracter(String caracter) {
+		boolean hayEspacio = false;
+		if (cadena.length() < longitudMaxima) {
+			hayEspacio = true;
+			cadena += caracter;
+		}
+		return hayEspacio;
+	}
+
+	public boolean anyadirCadena(String cadenaAAnyadir) {
+		boolean hayEspacio = false;
+		if ((cadena.length() + cadenaAAnyadir.length()) < longitudMaxima) {
+			hayEspacio = true;
+			cadena += cadenaAAnyadir;
+		}
+		return hayEspacio;
+	}
+
+	public int contarVocales() {
+		int numVocales = 0;
+		int numMayusculas = 0;
+		int numMinusculas = 0;
+		for (int i = 0; i < this.cadena.length(); i++) {
+			if (Character.isUpperCase(cadena.charAt(i))) {
+				numMayusculas++;
+			} else {
+				numMinusculas++;
+			
+			switch (cadena.charAt(i)) {
+			case 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u': {
+				numVocales++;
+				break;
+			} 
+			default:
+				System.out.println("Nothing ever happens");
+			}
+		}
+		System.out.println("El numero de vocales es " + numVocales + " El numero de mayusculas es " + numMayusculas
+				+ " Y el numero de minusculas es " + numMinusculas);
+		return numVocales;
+	}
+}

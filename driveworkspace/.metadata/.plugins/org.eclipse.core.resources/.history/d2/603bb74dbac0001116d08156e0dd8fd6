@@ -1,0 +1,27 @@
+package FicherosBinarios;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class Ejercicio6FicherosBinarios {
+
+	public static void main(String[] args) {
+		Pedido[] listaPedidos = new Pedido[3];
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Escribe el nombre del fichero que se va a escribir");
+		String nombreFichero = sc.next();
+	}
+
+	void escribirPedidos(Pedido[] pedidos, String nomFichero) throws IOException {
+		File fichPedidos = new File(nomFichero);
+		DataOutputStream dataOS = new DataOutputStream(new FileOutputStream(fichPedidos));
+		for (Pedido pedido : pedidos) {
+			dataOS.writeUTF(pedido.descripcion);
+
+		}
+	}
+
+	void leerPedidos(String nomFichero) {
+
+	}
+}

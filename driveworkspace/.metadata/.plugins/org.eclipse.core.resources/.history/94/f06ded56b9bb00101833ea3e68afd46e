@@ -1,0 +1,26 @@
+package funcionesImportantes;
+
+import java.util.Scanner;
+
+public class FuncionesBasicasVarias {
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+	}
+
+	public static int peticionDeEnteros() {
+		System.out.println("Porfavor introduce un entero");
+		int intADevolver = sc.nextInt();
+		return intADevolver;
+	}
+
+	public static float calculoDeMedia(int total, int instancias) {
+		float mediaResultado = (float) total / instancias;
+		return mediaResultado;
+	}
+
+	public static float calucloDePorcentaje(int parte, int entero) {
+		float porcentaje = 100 * parte / entero;
+		return porcentaje;
+	}
+}

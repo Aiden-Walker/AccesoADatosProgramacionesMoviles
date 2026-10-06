@@ -1,0 +1,16 @@
+package ejBienvenida;
+
+public class Profesor extends Thread {
+	String nombre;
+	Bienvenida saludo;
+
+	public Profesor(String nombre, Bienvenida bienvenida) {
+		super(nombre);
+		this.nombre = nombre;
+		this.saludo = bienvenida;
+	}
+
+	public void run() {
+		saludo.llegadaProfesor(nombre);
+	}
+}

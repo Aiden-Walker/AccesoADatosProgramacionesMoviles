@@ -1,0 +1,21 @@
+package boletin2Tablas;
+
+import funcionesImportantes.FuncionesTablas;
+
+public class Ejercicio9 {
+
+	public static void main(String[] args) {
+		int[] numerosPrimitiva = FuncionesTablas.creadorTablas(6);
+		int[] numerosGanadores = FuncionesTablas.creadorTablas(6);
+		System.out.println("Has tenido la modica cantidad de "+comprobadorPrimitiva(numerosPrimitiva, numerosGanadores)+" Aciertos");
+		}
+	static int comprobadorPrimitiva(int[] primitivaAComparar, int[] combinacionGanadora) {
+		int aciertos = 0;
+		for (int counter = 0; counter < primitivaAComparar.length; counter++) {
+			if(primitivaAComparar[counter]==combinacionGanadora[counter]) {
+				aciertos++;
+			}
+		}
+		return aciertos;
+	}
+}

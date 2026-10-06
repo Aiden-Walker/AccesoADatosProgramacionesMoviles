@@ -1,0 +1,20 @@
+package examen1PSP;
+
+import java.io.IOException;
+
+public class Launcher {
+
+	public static void main(String[] args) {
+		ProcessBuilder pb = new ProcessBuilder("java", "-cp", "./bin", "examen1PSP.BuscaAnimales", "perro", "perro.txt",
+				args[0]);
+		try {
+			pb.start();
+			pb = new ProcessBuilder("java", "-cp", "./bin", "examen1PSP.BuscaAnimales", "gato", "gato.txt", args[0]);
+			pb.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

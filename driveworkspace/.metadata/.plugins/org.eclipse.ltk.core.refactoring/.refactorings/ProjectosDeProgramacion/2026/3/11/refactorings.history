@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;operationToPut&apos; in &apos;examenProgramacionColleciones.Modelo.anyadirOperacionAAgencia(...)&apos; to &apos;operationListToPut&apos;&#x0D;&#x0A;- Original project: &apos;ProjectosDeProgramacion&apos;&#x0D;&#x0A;- Original element: &apos;examenProgramacionColleciones.Modelo.anyadirOperacionAAgencia(Agencia, Operacion).operationToPut&apos;&#x0D;&#x0A;- Renamed element: &apos;operationToPut&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;operationToPut&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;examenProgramacionColleciones{Modelo.java[Modelo~anyadirOperacionAAgencia~QAgencia;~QOperacion;@operationToPut!995!1061!1017!1030!QLinkedList\&lt;QOperacion;&gt;;!0!false" name="operationListToPut" references="true" stamp="1773388222296" version="1.0"/>
+</session>

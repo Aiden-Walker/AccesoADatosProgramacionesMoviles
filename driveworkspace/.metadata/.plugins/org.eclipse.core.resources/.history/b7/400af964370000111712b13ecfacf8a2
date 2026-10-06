@@ -1,0 +1,14 @@
+package ejTurnosEntre3;
+
+public class IamTheOneWhoStops {
+	public synchronized void helloGuysWelcomeToMyMinecraftGameplay(String sayMyName) {
+		System.out.println("Hello, I am "+sayMyName);
+		try {
+			wait();
+			notifyAll();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

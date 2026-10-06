@@ -1,0 +1,45 @@
+package u4.controles.trayectos2015.fuentes;
+
+import java.util.Arrays;
+
+public class CiudadGastronomica extends Ciudad {
+	private String[] cuisine = new String[0];
+	private int nDishes = 0;
+
+	public CiudadGastronomica(String nombre, int numHabitantes, String[] daFood) {
+		super(nombre, numHabitantes);
+		this.cuisine = daFood;
+	}
+
+	/**
+	 * @return the cuisine
+	 */
+	public String[] getCuisine() {
+		return cuisine;
+	}
+
+	/**
+	 * @param cuisine the cuisine to set
+	 */
+	public void setCuisine(String[] cuisine) {
+		this.cuisine = cuisine;
+		nDishes = 0;
+		for (int i = 0; i < cuisine.length && cuisine[i] != null; i++) {
+			nDishes++;
+		}
+	}
+
+	public void addCuisine(String dish) {
+		if (this.cuisine.length <= this.nDishes) {
+			this.cuisine = Arrays.copyOf(cuisine, this.cuisine.length + 1);
+		}
+		this.cuisine[nDishes++] = dish;
+	}
+
+	@Override
+	public String toString() {
+		return "CiudadGastronomica [cuisine=" + Arrays.toString(cuisine) + ", nDishes=" + nDishes + ", nombre=" + nombre
+				+ ", numHabitantes=" + numHabitantes + "]";
+	}
+
+}

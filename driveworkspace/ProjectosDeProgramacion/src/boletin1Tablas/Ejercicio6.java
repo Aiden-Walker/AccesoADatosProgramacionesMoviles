@@ -1,0 +1,39 @@
+package boletin1Tablas;
+
+import java.util.Arrays;
+
+import funcionesImportantes.FuncionesTablas;
+
+public class Ejercicio6 {
+
+	public static void main(String[] args) {
+		int[] tablaSigma = FuncionesTablas.creadorTablasInt(5);
+		int[] tablaDelta = sinRepetidos(tablaSigma);
+		System.out.println(Arrays.toString(tablaDelta));
+	}
+
+	static int[] sinRepetidos(int[] tablaFunny) {
+		int[] tablaSinRepetidos = new int[tablaFunny.length];
+		int numElementosInsertados = 0;
+		for (int i = 0; i < tablaFunny.length; i++) {
+			int indiceBuscado = getIndexOf(tablaFunny[i], tablaSinRepetidos, numElementosInsertados);
+			if (indiceBuscado == -1) {
+				// El elemento buscado NO esta en la tabla sin repetidos.
+				tablaSinRepetidos[numElementosInsertados++] = tablaFunny[i];
+			}
+		}
+		return Arrays.copyOf(tablaSinRepetidos, numElementosInsertados);
+	}
+
+	public static int getIndexOf(int elemBuscado, int[] tabla, int numEInsertados) {
+		int indexFound = -1;
+		boolean enc = false;
+		for (int counter = 0; counter < numEInsertados && !enc; counter++) {
+			if (tabla[counter] == elemBuscado) {
+				indexFound = counter;
+				enc = true;
+			}
+		}
+		return indexFound;
+	}
+}

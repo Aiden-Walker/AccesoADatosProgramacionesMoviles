@@ -1,0 +1,97 @@
+package ejZoologico;
+
+import java.util.Arrays;
+
+public class Zoologico {
+	private Mamifero tMamiferos[];
+	private Veterinario tVeterinarios[];
+
+	public Zoologico() {
+		this.tVeterinarios = new Veterinario[0];
+		this.tMamiferos = new Mamifero[0];
+	}
+
+	public Mamifero[] gettMamiferos() {
+		return tMamiferos;
+	}
+
+	public Veterinario[] gettVeterinarios() {
+		return tVeterinarios;
+	}
+
+	public void addVeterinario(Veterinario veterinario) {
+		this.tVeterinarios = Arrays.copyOf(this.tVeterinarios, this.tVeterinarios.length + 1);
+		this.tVeterinarios[this.tVeterinarios.length - 1] = veterinario;
+	}
+
+	public void addMamifero(Mamifero mamifero) {
+		this.tMamiferos = Arrays.copyOf(tMamiferos, this.tMamiferos.length + 1);
+		tMamiferos[this.tMamiferos.length - 1] = mamifero;
+	}
+
+	/*
+	 * devuelve todos los mamíferos que hayan nacido entre las fechas de inicio y
+	 * fin que se pasan como parámetros.
+	 */
+
+	public Mamifero[] getMamiferosEntreFechas(Fecha inicio, Fecha fin) {
+		Mamifero[] mammalsToReturn = new Mamifero[10];
+		int nMammals = 0;
+		for (int i = 0; i < tMamiferos.length; i++) {
+			if ((tMamiferos[i].getDiaNacimiento().compareTo(inicio) >= 0
+					&& tMamiferos[i].getDiaNacimiento().compareTo(fin) <= 0)) {
+				mammalsToReturn[nMammals] = tMamiferos[i];
+				nMammals++;
+			}
+		}
+		mammalsToReturn = Arrays.copyOf(mammalsToReturn, nMammals);
+		return mammalsToReturn;
+	}
+
+	public int getNVeterinariosMasDe(int minNumNacimientos) {
+		int goodVets = 0;
+		/*
+		 * I don't know why I named it like that, I guess it's cause they make a lot of
+		 * work
+		 */
+		for (int i = 0; i < this.tVeterinarios.length; i++) {
+			int vetAssistances = 0;
+			for (int j = 0; j < this.tMamiferos.length; j++) {
+				if (this.tMamiferos[j].getAsistente().equals(this.tVeterinarios[i])) {
+					vetAssistances++;
+				}
+				if (vetAssistances > minNumNacimientos) {
+					goodVets++;
+				}
+			}
+		}
+		return goodVets;
+	}
+
+	public boolean veterinarioPadresEHijo() {
+		boolean isThisTrue = false;
+		for (int i = 0; i < this.tMamiferos.length && !isThisTrue; i++) {
+			if (this.tMamiferos[i].getAsistente().equals(this.tMamiferos[i].getPadre().getAsistente())
+					&& this.tMamiferos[i].getAsistente().equals(this.tMamiferos[i].getMadre().getAsistente())) {
+				isThisTrue = true;
+			}
+		}
+		return isThisTrue;
+	}
+
+	public void ordenarMamiferos() {
+		Arrays.sort(this.tMamiferos, new MammalComparator());
+	}
+
+	public boolean hayErroresEnFechas() {
+		boolean areThereErrors = false;
+		for (int i = 0; i < this.tMamiferos.length; i++) {
+			if ((this.tMamiferos[i].getDiaNacimiento()
+					.compareTo(this.tMamiferos[i].getPadre().getDiaNacimiento() < 0 && this.tMamiferos[i]
+							.getDiaNacimiento().compareTo(this.tMamiferos[i].getMadre().getDiaNacimiento() < 0)))) {
+
+			}
+		}
+		return areThereErrors;
+	}
+}

@@ -1,0 +1,16 @@
+package FicherosBinarios;
+
+public class Ejercicio6FicherosBinarios {
+
+	public static void main(String[] args) {
+		Pedido[] listaPedidos = new Pedido[3];
+	}
+
+	void escribirPedidos(Pedido[] pedidos, String nomFichero) {
+		
+	}
+
+	void leerPedidos(String nomFichero) {
+
+	}
+}

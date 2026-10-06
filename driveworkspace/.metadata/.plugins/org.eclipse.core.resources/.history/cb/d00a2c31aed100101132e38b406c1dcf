@@ -1,0 +1,133 @@
+package tarea1POO;
+
+public class CuentaCorriente {
+	private float saldo;
+	private float limiteDescubierto;
+	String dniTitular;
+	public String nombreTitular;
+	private static String nombreBanco;
+	private Banco bancoVinculado;
+
+	public CuentaCorriente(String dniTitular, String nombreTitular) {
+		super();
+		this.saldo = 0;
+		this.limiteDescubierto = -50;
+		this.dniTitular = dniTitular;
+		this.nombreTitular = nombreTitular;
+	}
+
+	public CuentaCorriente(float saldoInicial) {
+		this.saldo = saldoInicial;
+		this.limiteDescubierto = 0;
+	}
+
+	public CuentaCorriente(float saldoInicial, float limiteContratado, String dniTitularCuenta, Banco bancoCuenta) {
+		this.saldo = saldoInicial;
+		this.limiteDescubierto = limiteContratado;
+		this.nombreTitular = dniTitularCuenta;
+		this.bancoVinculado = bancoCuenta;
+	}
+
+	public Banco getBancoVinculado() {
+		return bancoVinculado;
+	}
+
+	public void setBancoVinculado(Banco bancoVinculado) {
+		this.bancoVinculado = bancoVinculado;
+	}
+
+	public void setNombreBanco(String nombreBanco) {
+		CuentaCorriente.nombreBanco = nombreBanco;
+	}
+
+	public String getNombreBanco() {
+		return nombreBanco;
+	}
+
+	/**
+	 * @return the saldo
+	 */
+	public double getSaldo() {
+		return saldo;
+	}
+
+	/**
+	 * @param saldo the saldo to set
+	 */
+	public void setSaldo(float saldo) {
+		this.saldo = saldo;
+	}
+
+	/**
+	 * @return the limiteDescubierto
+	 */
+	public double getLimiteDescubierto() {
+		return limiteDescubierto;
+	}
+
+	/**
+	 * @param limiteDescubierto the limiteDescubierto to set
+	 */
+	public void setLimiteDescubierto(float limiteDescubierto) {
+		this.limiteDescubierto = limiteDescubierto;
+	}
+
+	/**
+	 * @return the dniTitular
+	 */
+	public String getDniTitular() {
+		return dniTitular;
+	}
+
+	/**
+	 * @param dniTitular the dniTitular to set
+	 */
+	public void setDniTitular(String dniTitular) {
+		this.dniTitular = dniTitular;
+	}
+
+	/**
+	 * @return the nombreTitular
+	 */
+	public String getNombreTitular() {
+		return nombreTitular;
+	}
+
+	/**
+	 * @param nombreTitular the nombreTitular to set
+	 */
+	public void setNombreTitular(String nombreTitular) {
+		this.nombreTitular = nombreTitular;
+	}
+
+	public String toString() {
+		return "Su cuenta tiene un saldo de " + this.saldo
+				+ " Y el limite de descubierto que usted tiene contratado es de " + this.limiteDescubierto
+				+ " El nombre del titular de esta cuenta es " + this.nombreTitular + " El DNI de dicho titular es "
+				+ this.dniTitular + "Su banco y los datos de su banco son " + this.bancoVinculado.toString();
+	}
+
+	public boolean sacarDinero(float moneyCheckOut) {
+		boolean isOperationSucsessful = false;
+		if ((this.saldo - moneyCheckOut) >= limiteDescubierto) {
+			isOperationSucsessful = true;
+			this.saldo -= moneyCheckOut;
+			System.out.println("La operacion se ha realizado con exito");
+		} else {
+			System.out.println("La operacion tuvo un error y no ha sido llevada a cabo, vuelva a intentarlo");
+		}
+		return isOperationSucsessful;
+	}
+
+	public void ingresarDinero(float moneyInserted) {
+		this.saldo += moneyInserted;
+	}
+
+	public void infoCuenta() {
+		System.out.println("Su cuenta tiene un saldo de " + this.saldo
+				+ " Y el limite de descubierto que usted tiene contratado es de " + this.limiteDescubierto
+				+ " El nombre del titular de esta cuenta es " + this.nombreTitular + " El DNI de dicho titular es "
+				+ this.dniTitular);
+	}
+
+}

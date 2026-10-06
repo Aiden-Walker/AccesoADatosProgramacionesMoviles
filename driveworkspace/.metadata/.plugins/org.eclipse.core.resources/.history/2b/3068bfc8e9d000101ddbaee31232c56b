@@ -1,0 +1,17 @@
+package tema1ProgramacionDeServiciosYProcesos;
+
+public class Multiplicador {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double numeroFunny = 
+	}
+
+	public double multiplica(int n1, int n2) {
+		double resultado = 1;
+		for (int i = n1; i <= n2; i++) {
+			resultado *= i;
+		}
+		return resultado;
+	}
+}

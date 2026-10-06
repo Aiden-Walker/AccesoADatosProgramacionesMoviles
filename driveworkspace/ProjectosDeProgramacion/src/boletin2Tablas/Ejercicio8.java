@@ -1,0 +1,23 @@
+package boletin2Tablas;
+
+import java.util.Arrays;
+
+public class Ejercicio8 {
+
+	public static void main(String[] args) {
+		int[][] tablaBidimensional = matrizesBidimensionalesIJ(5, 5);
+		for (int counter = 0; counter < tablaBidimensional.length;counter++) {
+			System.out.println(Arrays.toString(tablaBidimensional[counter]));
+		}
+	}
+	static int[][] matrizesBidimensionalesIJ(int cantidad1raDimension, int cantidad2daDimension) {
+		System.out.println("Vamos a crear una matriz/tabla bidimensional");
+		int[][] matrizResultado = new int[cantidad1raDimension][cantidad2daDimension];
+		for (int i = 0; i < matrizResultado.length; i++) {
+			for (int j = 0; j < matrizResultado[i].length; j++) {
+				matrizResultado[i][j] = i+j;
+			}
+		}
+		return matrizResultado;
+	}
+}

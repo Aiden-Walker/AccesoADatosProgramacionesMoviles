@@ -1,0 +1,38 @@
+package tarea1POO;
+
+public class Bombilla {
+	private static boolean estanPlomosEnc;
+	private boolean estaEncendido;
+
+	/**
+	 * @return the estanPlomosEnc
+	 */
+	public static boolean isEstanPlomosEnc() {
+		return estanPlomosEnc;
+	}
+
+	/**
+	 * @param estanPlomosEnc the estanPlomosEnc to set
+	 */
+	public static void setEstanPlomosEnc(boolean estanPlomosEnc) {
+		Bombilla.estanPlomosEnc = estanPlomosEnc;
+	}
+
+	/**
+	 * @return the estaEncendido
+	 */
+	public boolean isEstaEncendido() {
+		return estaEncendido;
+	}
+
+	/**
+	 * @param estaEncendido the estaEncendido to set
+	 */
+	public void setEstaEncendido(boolean estaEncendido) {
+		this.estaEncendido = estaEncendido;
+	}
+
+	public boolean isInterruptorPEnc() {
+
+	}
+}

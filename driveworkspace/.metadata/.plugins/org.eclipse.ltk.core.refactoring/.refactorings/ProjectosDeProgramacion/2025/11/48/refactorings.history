@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;P1&apos; in &apos;ejemplosClasePOO.RageBait.main(...)&apos; to &apos;p1&apos;&#x0D;&#x0A;- Original project: &apos;ProjectosDeProgramacion&apos;&#x0D;&#x0A;- Original element: &apos;ejemplosClasePOO.RageBait.main(String[]).P1&apos;&#x0D;&#x0A;- Renamed element: &apos;P1&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;P1&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;ejemplosClasePOO{RageBait.java[RageBait~main~\[QString;@P1!139!165!147!148!QPersona;!0!false" name="p1" references="true" stamp="1764316939836" version="1.0"/>
+</session>

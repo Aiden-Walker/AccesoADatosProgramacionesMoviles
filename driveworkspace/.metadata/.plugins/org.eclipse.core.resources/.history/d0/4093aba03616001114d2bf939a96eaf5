@@ -1,0 +1,12 @@
+package examen1PSP;
+
+public class Launcher {
+
+	public static void main(String[] args) {
+		ProcessBuilder pb = new ProcessBuilder("java", "-cp", "./bin", "examen1PSP.BuscaAnimales", "perro", "perro.txt",
+				"datos.txt");
+		pb.start();
+		pb = new ProcessBuilder("java", "-cp", "./bin", "examen1PSP.BuscaAnimales", "gato", "gato.txt", "datos.txt");
+	}
+
+}

@@ -1,0 +1,19 @@
+package ejercicioTipoExamenArticulo;
+
+import java.util.Comparator;
+
+public class CompArtTotalVentas implements Comparator<Articulo> {
+	private ModeloDeDatos mod;
+
+	public CompArtTotalVentas(ModeloDeDatos mod) {
+		super();
+		this.mod = mod;
+	}
+
+	@Override
+	public int compare(Articulo o1, Articulo o2) {
+
+		return 0;
+	}
+
+}

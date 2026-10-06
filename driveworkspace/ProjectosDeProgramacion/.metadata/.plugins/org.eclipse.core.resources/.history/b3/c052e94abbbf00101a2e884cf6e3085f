@@ -1,0 +1,69 @@
+package funcionesImportantes;
+
+import java.util.Scanner;
+
+public class FuncionesTablas {
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// bottom text
+		sc.close();
+	}
+
+	public static int[] creadorTablasInt(int cantidadNumeros) {
+		System.out.println("Vamos a crear una tabla");
+		int[] tabla = new int[cantidadNumeros];
+		for (int i = 0; i < tabla.length; i++) {
+			tabla[i] = FuncionesBasicas.peticionDeEnteros();
+		}
+		return tabla;
+	}
+
+	public static int[][] matrizesBidimensionalesInt(int cantidad1raDimension, int cantidad2daDimension) {
+		System.out.println("Vamos a crear una matriz/tabla bidimensional");
+		int[][] matrizResultado = new int[cantidad1raDimension][cantidad2daDimension];
+		for (int i = 0; i < matrizResultado.length; i++) {
+			for (int j = 0; j < matrizResultado[i].length; j++) {
+				matrizResultado[i][j] = FuncionesBasicas.peticionDeEnteros();
+			}
+		}
+		return matrizResultado;
+	}
+
+	public static int getIndexOfInt(int elemBuscado, int[] tabla, int numEInsertados) {
+		int indexFound = -1;
+		boolean enc = false;
+		for (int counter = 0; counter < numEInsertados && !enc; counter++) {
+			if (tabla[counter] == elemBuscado) {
+				indexFound = counter;
+				enc = true;
+			}
+		}
+		return indexFound;
+	}
+
+	public static int getIndexOfString(String elemBuscado, String[] tabla, int numEInsertados) {
+		int indexFound = -1;
+		boolean enc = false;
+		for (int counter = 0; counter < numEInsertados && !enc; counter++) {
+			if (tabla[counter] == elemBuscado) {
+				indexFound = counter;
+				enc = true;
+			}
+		}
+		return indexFound;
+	}
+
+	public static boolean hayDatosFloat2D(float[][] matriz, int fila) {
+		boolean hay = false;
+
+		for (int j = 0; j < matriz[0].length && !hay; j++) {
+			if (matriz[fila][j] > -1) {
+				hay = true;
+			}
+		}
+
+		return hay;
+	}
+}

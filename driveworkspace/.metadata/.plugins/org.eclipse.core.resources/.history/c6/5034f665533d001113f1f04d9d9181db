@@ -1,0 +1,225 @@
+package ejercicio2InterfacesGraficas;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JRadioButton;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class VentanaPpal extends JFrame {
+	private JTextField textFieldNomPok;
+	private JTextField textFieldGenPok;
+	private JComboBox comboBoxPokABorrar;
+	private JRadioButton radiob1;
+	private JRadioButton radiob2;
+	public VentanaPpal(Principal controlador) {
+		setTitle("Pokemon");
+		setResizable(false);
+		JTabbedPane selector = new JTabbedPane(JTabbedPane.TOP);
+		
+		JPanel pokemonList = new JPanel();
+		selector.addTab("Pokemons", null, pokemonList, null);
+		
+		JPanel panelPokData = new JPanel();
+		panelPokData.setBorder(new TitledBorder(null, "A\u00F1adir Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		JPanel panelDeletePok = new JPanel();
+		panelDeletePok.setBorder(new TitledBorder(null, "Borrar Pokemon", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GroupLayout gl_pokemonList = new GroupLayout(pokemonList);
+		gl_pokemonList.setHorizontalGroup(
+			gl_pokemonList.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pokemonList.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_pokemonList.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelDeletePok, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addComponent(panelPokData, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 378, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(41, Short.MAX_VALUE))
+		);
+		gl_pokemonList.setVerticalGroup(
+			gl_pokemonList.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pokemonList.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelPokData, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelDeletePok, GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		
+		JLabel lblNewLabel_4 = new JLabel("Pokemon a borrar");
+		
+		comboBoxPokABorrar = new JComboBox();
+		
+		JButton btnBorrarPok = new JButton("Borrar");
+		btnBorrarPok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		GroupLayout gl_panelDeletePok = new GroupLayout(panelDeletePok);
+		gl_panelDeletePok.setHorizontalGroup(
+			gl_panelDeletePok.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelDeletePok.createSequentialGroup()
+					.addGroup(gl_panelDeletePok.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelDeletePok.createSequentialGroup()
+							.addComponent(lblNewLabel_4)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(comboBoxPokABorrar, 0, 251, Short.MAX_VALUE))
+						.addGroup(gl_panelDeletePok.createSequentialGroup()
+							.addGap(10)
+							.addComponent(btnBorrarPok, GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		gl_panelDeletePok.setVerticalGroup(
+			gl_panelDeletePok.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelDeletePok.createSequentialGroup()
+					.addGroup(gl_panelDeletePok.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_4)
+						.addComponent(comboBoxPokABorrar, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+					.addComponent(btnBorrarPok)
+					.addContainerGap())
+		);
+		panelDeletePok.setLayout(gl_panelDeletePok);
+		
+		JLabel lblNewLabel = new JLabel("Nombre");
+		
+		textFieldNomPok = new JTextField();
+		textFieldNomPok.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Tipo");
+		
+		JComboBox comboBoxTipoPok = new JComboBox();
+		comboBoxTipoPok.setModel(new DefaultComboBoxModel(new String[] {"Acero", "Agua", "Bicho", "Planta", "Fuego"}));
+		
+		JLabel lblNewLabel_2 = new JLabel("Generacion (1-7):");
+		
+		textFieldGenPok = new JTextField();
+		textFieldGenPok.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Estado Evolutivo:");
+		
+		radiob1 = new JRadioButton("Menor");
+		
+		radiob2 = new JRadioButton("Medio");
+		
+		JRadioButton radiob3 = new JRadioButton("Mayor");
+		
+		JButton btnNewButton = new JButton("Guardar");
+		
+		JButton buttonCancel = new JButton("Cancelar");
+		GroupLayout gl_panelPokData = new GroupLayout(panelPokData);
+		gl_panelPokData.setHorizontalGroup(
+			gl_panelPokData.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelPokData.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelPokData.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelPokData.createSequentialGroup()
+							.addGroup(gl_panelPokData.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panelPokData.createSequentialGroup()
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textFieldNomPok))
+								.addGroup(gl_panelPokData.createSequentialGroup()
+									.addComponent(lblNewLabel_2)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textFieldGenPok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(18)
+							.addComponent(lblNewLabel_1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(comboBoxTipoPok, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panelPokData.createSequentialGroup()
+							.addGroup(gl_panelPokData.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_panelPokData.createSequentialGroup()
+									.addComponent(lblNewLabel_3)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(radiob1))
+								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(18)
+							.addGroup(gl_panelPokData.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelPokData.createSequentialGroup()
+									.addGap(21)
+									.addComponent(buttonCancel, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelPokData.createSequentialGroup()
+									.addComponent(radiob2)
+									.addGap(18)
+									.addComponent(radiob3)))))
+					.addGap(93))
+		);
+		gl_panelPokData.setVerticalGroup(
+			gl_panelPokData.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelPokData.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelPokData.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(textFieldNomPok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(comboBoxTipoPok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panelPokData.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_2)
+						.addComponent(textFieldGenPok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panelPokData.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_3)
+						.addComponent(radiob1)
+						.addComponent(radiob2)
+						.addComponent(radiob3))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelPokData.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(buttonCancel))
+					.addContainerGap(15, Short.MAX_VALUE))
+		);
+		panelPokData.setLayout(gl_panelPokData);
+		pokemonList.setLayout(gl_pokemonList);
+		
+		JPanel combats = new JPanel();
+		selector.addTab("Combates", null, combats, null);
+		
+		JPanel listings = new JPanel();
+		selector.addTab("Listados", null, listings, null);
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(selector, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(selector, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+		);
+		getContentPane().setLayout(groupLayout);
+		
+	}
+	protected void botonGuardarPulsado() {
+		if(this.textFieldNomPok.getText().isEmpty()) {
+			this.error("Debe escribir un nombre");
+		} else {
+			int gen = Integer.parseInt(this.textFieldGenPok.getText());
+			if(gen < 1 || gen > 7) {
+				this.error("La generacion que ha escrito es invalida");
+			} else {
+				String evoState = "";
+				if(this.radio)
+			}
+		}
+	}
+	public void msg(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "Correcto", JOptionPane.INFORMATION_MESSAGE);
+	}
+	public void error(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+}

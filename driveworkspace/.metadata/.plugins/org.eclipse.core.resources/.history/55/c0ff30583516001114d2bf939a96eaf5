@@ -1,0 +1,103 @@
+package examen1PSP;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/*En verdad podria utilizar este programa para buscar a los gatos con un simple cambio, un string que sea "animal a buscar", lo cual me permitiria reutilizar la clase entera para los gatos, esto locked in*/
+public class BuscaAnimales {
+
+	public static void main(String[] args) {
+		String animalAbuscar = args[0];
+		String archivoSalida = args[1];
+		String archivoEntrada = args[2];
+		String linea;
+		int numAnimales = 0;
+		try {
+			BufferedReader readAn = new BufferedReader(new FileReader(archivoEntrada));
+			BufferedWriter writeAn = new BufferedWriter(new FileWriter(archivoSalida));
+			System.out.println("Buscando " + animalAbuscar + "s");
+			while ((linea = readAn.readLine()) != null) {
+				if (linea.toLowerCase().contains(animalAbuscar)) {
+					writeAn.write(linea);
+					numAnimales++;
+				}
+			}
+			System.out.println("Numero de " + animalAbuscar + "s " + numAnimales);
+		} catch (Exception e) {
+
+		}
+	}
+
+	/*
+	 * Primer aviso de que todo el codigo se reutiliza para buscar, gatos, en base a
+	 * la linea de animal a buscar Si tuviera que renombrar todos los atributos y
+	 * metodos me llevaria un rato, y debo aprovechar el tiempo
+	 */
+	public Process buscaAnimalesProcess() {
+		ProcessBuilder pb;
+		Process trust = null;
+		try {
+			pb = new ProcessBuilder("java", "-jar", "BuscaPerros.jar");
+			trust = pb.start();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return trust;
+
+	}
+
+	public void start() throws IOException {
+		System.out.println("Buscando " + animalAbuscar + "s");
+		while (readAn.readLine() != null) {
+			String lineaPerruna = readAn.readLine();
+			if (lineaPerruna.toLowerCase().contains(animalAbuscar)) {
+				writeMyFiles.write(lineaPerruna);
+				numAnimales++;
+			}
+		}
+		System.out.println("Numero de " + animalAbuscar + "s " + numAnimales);
+	}
+
+	@Override
+	public InputStream getInputStream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InputStream getErrorStream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int waitFor() throws InterruptedException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int exitValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public OutputStream getOutputStream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

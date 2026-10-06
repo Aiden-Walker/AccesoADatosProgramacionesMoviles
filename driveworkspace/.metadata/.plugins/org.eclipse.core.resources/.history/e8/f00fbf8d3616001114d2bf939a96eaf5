@@ -1,0 +1,35 @@
+package examen1PSP;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Launcher {
+
+	public static void main(String[] args) throws IOException {
+		System.out.println(System.getProperty("user.dir"));
+		File datos = new File(
+				"G:\\Shared drives\\DAMHermanosMachado\\examenRecuPSPTema1\\recuperacionPSPTema1\\src\\recuperacionPSPTema1\\datos.txt");
+		FileReader fr = new FileReader(datos);
+		BufferedReader br = new BufferedReader(fr);
+		File perros = new File(
+				"G:\\Shared drives\\DAMHermanosMachado\\examenRecuPSPTema1\\recuperacionPSPTema1\\src\\recuperacionPSPTema1\\perros.txt");
+		FileWriter fwperros = new FileWriter(perros);
+		File gatos = new File(
+				"G:\\Shared drives\\DAMHermanosMachado\\examenRecuPSPTema1\\recuperacionPSPTema1\\src\\recuperacionPSPTema1\\gatos.txt");
+		FileWriter fwgatos = new FileWriter(gatos);
+		BuscaAnimales buscandingPerruno = new BuscaAnimales(perros, fr, fwperros, br, 0, "perro");
+		BuscaAnimales buscandingGatuno = new BuscaAnimales(gatos, fr, fwgatos, br, 0, "gato");
+		buscandingPerruno.buscaAnimalesProcess();
+		buscandingGatuno.buscaAnimalesProcess();
+		/*
+		 * Debido a que no tengo bien el process builder, voy a hacer un start de los
+		 * procesos para enseñar que algo hacen
+		 */
+		// buscandingPerruno.start();
+		// buscandingGatuno.start();
+	}
+
+}

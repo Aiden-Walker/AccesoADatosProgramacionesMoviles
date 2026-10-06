@@ -1,0 +1,31 @@
+package examen1PSP;
+
+import java.io.*;
+
+/*En verdad podria utilizar este programa para buscar a los gatos con un simple cambio, un string que sea "animal a buscar", lo cual me permitiria reutilizar la clase entera para los gatos, esto locked in*/
+public class BuscaAnimales {
+
+	public static void main(String[] args) {
+		String animalAbuscar = args[0];
+		String archivoSalida = args[1];
+		String archivoEntrada = args[2];
+		String linea;
+		int numAnimales = 0;
+		try {
+			BufferedReader readAn = new BufferedReader(new FileReader(archivoEntrada));
+			BufferedWriter writeAn = new BufferedWriter(new FileWriter(archivoSalida));
+			//System.out.println("Buscando " + animalAbuscar + "s");
+			while ((linea = readAn.readLine()) != null) {
+				if (linea.toLowerCase().contains(animalAbuscar)) {
+					writeAn.write(linea+"\n");
+					numAnimales++;
+				}
+			}
+			System.out.println("Numero de " + animalAbuscar + "s " + numAnimales);
+			readAn.close();
+			writeAn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

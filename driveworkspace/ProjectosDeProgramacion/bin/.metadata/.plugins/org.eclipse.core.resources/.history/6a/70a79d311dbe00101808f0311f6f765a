@@ -1,0 +1,11 @@
+package boletin2Tablas;
+
+import funcionesImportantes.FuncionesTablas;
+
+public class Ejercicio8 {
+
+	public static void main(String[] args) {
+		int[][] tablaBidimensional = FuncionesTablas.matrizesBidimensionales(5, 5);
+	}
+
+}

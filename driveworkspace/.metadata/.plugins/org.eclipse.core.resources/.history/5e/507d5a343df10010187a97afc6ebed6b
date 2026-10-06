@@ -1,0 +1,31 @@
+
+public class Pais
+{
+ private String nombre;						// nombre del país
+ private Guerra tablaGuerras[]; 			// guerras en las que ha participado este país.
+ private int nGuerras;						// número de elementos en la tabla.
+ public static final int MAX_GUERRAS = 10;	// constante con el máximo de guerras permitido en un país.
+ 
+ public Pais(String nombre)
+ {
+	 this.nombre = nombre;
+	 this.tablaGuerras = new Guerra[Pais.MAX_GUERRAS];
+	 this.nGuerras = 0;
+ }
+
+@Override
+public String toString()
+{
+	return nombre;
+}
+
+public void participóEn(Guerra guerra) 
+{
+	this.tablaGuerras[this.nGuerras++] = guerra;
+	
+}
+ 
+ 
+ 
+ 
+}

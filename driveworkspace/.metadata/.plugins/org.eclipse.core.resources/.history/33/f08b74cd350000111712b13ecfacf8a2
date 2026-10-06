@@ -1,0 +1,5 @@
+package ejTurnosEntre3;
+
+public class HilitoSkibidi extends Thread{
+
+}

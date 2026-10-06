@@ -1,0 +1,67 @@
+package ejerciciosControles;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+import funcionesImportantes.FuncionesTablas;
+
+public class ControlJava18_19 {
+
+	public static void main(String[] args) {
+		int[][] votosPartidosCiudades = new int[20][30];
+		String[] partidos = new String[20];
+		int numPartidosIns = 0;
+		String[] ciudades = new String[30];
+		int numCiudadesIns = 0;
+		for (int fila = 0; fila < votosPartidosCiudades.length; fila++) {
+			for (int columna = 0; columna < votosPartidosCiudades[fila].length; columna++) {
+				votosPartidosCiudades[fila][columna] = -1;
+			}
+		}
+		Scanner sc = new Scanner(System.in);
+		System.out.println("1- Introducir votos obtenidos en una ciudad por un partido.\r\n"
+				+ "2- Listado alfabetico por partidos de todos los datos introducidos.\r\n"
+				+ "3- Listado de los mejores resultados de cada partido\r\n"
+				+ "4- Listado de localidades de menor a mayor participacion.\r\n"
+				+ "5- Porcentaje de votos obtenidos de cada partido en la comunidad.\r\n" + "6- Fin");
+		int opcion = sc.nextInt();
+		while (opcion < 6) {
+			switch (opcion) {
+			case 1:
+				int iPA = -1;
+				int iCA = -1;
+				System.out.println("Introduce un partido");
+				String partidoAIntroducir = sc.next();
+				iPA = FuncionesTablas.getIndexOfString(partidoAIntroducir, partidos, numPartidosIns);
+				partidos[iPA] = partidoAIntroducir;
+				numPartidosIns++;
+				System.out.println("Introduce ahora una ciudad");
+				String ciudadAIntroducir = sc.next();
+				iCA = FuncionesTablas.getIndexOfString(ciudadAIntroducir, ciudades, numCiudadesIns);
+				ciudades[iCA] = ciudadAIntroducir;
+				numCiudadesIns++;
+				System.out.println("A continuacion, introduce el numero de votos de dicho partido en dicha ciudad");
+				votosPartidosCiudades[iPA][iCA]=sc.nextInt();
+				break;
+			case 2:
+				String[] partidosOrdenados = Arrays.copyOf(partidos, numPartidosIns);
+				Arrays.sort(partidosOrdenados);
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			}
+			System.out.println("1- Introducir votos obtenidos en una ciudad por un partido.\r\n"
+					+ "2- Listado alfabetico por partidos de todos los datos introducidos.\r\n"
+					+ "3- Listado de los mejores resultados de cada partido\r\n"
+					+ "4- Listado de localidades de menor a mayor participacion.\r\n"
+					+ "5- Porcentaje de votos obtenidos de cada partido en la comunidad.\r\n" + "6- Fin");
+			opcion = sc.nextInt();
+		}
+		sc.close();
+	}
+
+}

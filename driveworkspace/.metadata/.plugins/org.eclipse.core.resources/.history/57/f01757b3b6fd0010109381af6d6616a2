@@ -1,0 +1,7 @@
+package ejZoologico;
+
+import java.util.Comparator;
+
+public class MammalComparator implements Comparator<T> {
+
+}

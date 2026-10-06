@@ -1,0 +1,70 @@
+package tarea1POO;
+
+public class Bombilla {
+	private static boolean estanPlomosEnc;
+	private boolean estaEncendido;
+
+	public Bombilla(boolean estaEncendido) {
+		super();
+		this.estaEncendido = estaEncendido;
+	}
+
+	/**
+	 * @return the estanPlomosEnc
+	 */
+	public static boolean isEstanPlomosEnc() {
+		return estanPlomosEnc;
+	}
+
+	/**
+	 * @param estanPlomosEnc the estanPlomosEnc to set
+	 */
+	public static void setEstanPlomosEnc(boolean estanPlomosEnc) {
+		Bombilla.estanPlomosEnc = estanPlomosEnc;
+	}
+
+	/**
+	 * @return the estaEncendido
+	 */
+	public boolean isEstaEncendido() {
+		return estaEncendido;
+	}
+
+	/**
+	 * @param estaEncendido the estaEncendido to set
+	 */
+	public void setEstaEncendido(boolean estaEncendido) {
+		this.estaEncendido = estaEncendido;
+	}
+
+	public static boolean isInterruptorPEnc() {
+		return estanPlomosEnc;
+	}
+
+	public void estaLaBombillaEncendida() {
+		if (Bombilla.estanPlomosEnc && this.estaEncendido) {
+			System.out.println("La bombilla esta encendida");
+		} else if (!Bombilla.estanPlomosEnc) {
+			System.out.println("Las bombillas estan apagadas porque los fusibles estan bajados");
+		}
+	}
+
+	public static void estanLosFusiblesRotos() {
+		if (!Bombilla.estanPlomosEnc) {
+			System.out.println("Los fusibles han sido saboteados por el impostor");
+		}
+	}
+
+	public void accionarInterruptor() {
+		this.estaEncendido = !this.estaEncendido;
+	}
+
+	public static void sabotearRepararFusibles() { // AMONG US / UN-AMONG US
+		Bombilla.estanPlomosEnc = !Bombilla.estanPlomosEnc;
+	}
+
+	@Override
+	public String toString() {
+		return "Bombilla [estaEncendido=" + estaEncendido + "]";
+	}
+}

@@ -1,0 +1,75 @@
+package ejemplosClasePOO;
+
+public class Persona {
+	private String nombre;
+	private int edad;
+	private double estatura;
+
+	public Persona() {
+
+	}
+
+	public Persona(String nombre, int edad, double estatura) {
+		this.nombre = nombre;
+		this.edad = edad;
+		this.estatura = estatura;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the edad
+	 */
+	public int getEdad() {
+		return edad;
+	}
+
+	/**
+	 * @param edad the edad to set
+	 */
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
+	/**
+	 * @return the estatura
+	 */
+	public double getEstatura() {
+		return estatura;
+	}
+
+	/**
+	 * @param estatura the estatura to set
+	 */
+	public void setEstatura(double estatura) {
+		this.estatura = estatura;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	}
+
+	public void saludar() {
+		System.out.println("Hola, soy " + nombre + "Tengo " + edad + " Años, y mido " + estatura);
+	}
+
+	public void cumplirAnyos() {
+		edad++;
+	}
+
+	public void crecer(double incremento) {
+		estatura += incremento;
+	}
+}

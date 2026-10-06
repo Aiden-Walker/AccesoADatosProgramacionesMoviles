@@ -1,0 +1,33 @@
+package examen1PSP;
+
+import java.io.*;
+
+public class Launcher {
+
+	public static void main(String[] args) {
+		ProcessBuilder pb = new ProcessBuilder("java", "-cp", "./bin", "examen1PSP.BuscaAnimales", "perro", "perro.txt",
+				args[0]);
+		try {
+			pb.redirectError(new File("erroresPerro.txt"));
+			pb.redirectOutput(new File("outPerro.txt"));
+			Process pPerro = pb.start();
+			BufferedReader br = new BufferedReader(new InputStreamReader(pPerro.getInputStream()));
+			pPerro.waitFor();
+			System.out.println(br.readLine());
+			System.out.println(br.readLine());
+			pb = new ProcessBuilder("java", "-cp", "./bin", "examen1PSP.BuscaAnimales", "gato", "gato.txt", args[0]);
+			pb.redirectError(new File("erroresGato.txt"));
+			pb.redirectOutput(new File("outGato.txt"));
+			Process pGato = pb.start();
+			pGato.getInputStream();
+			br = new BufferedReader(new InputStreamReader(pGato.getInputStream()));
+			pGato.waitFor();
+			System.out.println(br.readLine());
+			System.out.println(br.readLine());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

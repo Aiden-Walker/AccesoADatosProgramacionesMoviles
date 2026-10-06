@@ -1,0 +1,17 @@
+package ejZoologico;
+
+import java.util.Comparator;
+
+public class MammalComparator implements Comparator<Mamifero> {
+
+	@Override
+	public int compare(Mamifero o1, Mamifero o2) {
+		if (!(o1.getDiaNacimiento().equals(o2.getDiaNacimiento()))) {
+			int result = o1.getDiaNacimiento().compareTo(o2.getDiaNacimiento());
+		} else {
+			int result = o1.getNombre().compareTo(o2.getNombre());
+		}
+		return result;
+	}
+
+}

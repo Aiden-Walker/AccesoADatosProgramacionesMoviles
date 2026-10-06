@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;ejZoo&apos; to &apos;ejZoologico&apos;&#x0D;&#x0A;- Original project: &apos;ProjectosDeProgramacion&apos;&#x0D;&#x0A;- Original element: &apos;ProjectosDeProgramacion/src/ejZoo&apos;&#x0D;&#x0A;- Renamed element: &apos;ProjectosDeProgramacion/src/ejZoologico&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings&#x0D;&#x0A;- Rename subpackages of the package" description="Rename package &apos;ejZoo&apos;" flags="589830" hierarchical="true" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;ejZoo" name="ejZoologico" qualified="false" references="true" stamp="1769759019088" textual="false" version="1.0"/>
+</session>

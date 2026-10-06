@@ -1,0 +1,33 @@
+package funcionesImportantes;
+
+import java.util.Scanner;
+
+public class FuncionesTablas {
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// bottom text
+		sc.close();
+	}
+
+	public static int[] creadorTablasInt(int cantidadNumeros) {
+		System.out.println("Vamos a crear una tabla");
+		int[] tabla = new int[cantidadNumeros];
+		for (int i = 0; i < tabla.length; i++) {
+			tabla[i] = FuncionesBasicas.peticionDeEnteros();
+		}
+		return tabla;
+	}
+
+	public static int[][] matrizesBidimensionalesInt(int cantidad1raDimension, int cantidad2daDimension) {
+		System.out.println("Vamos a crear una matriz/tabla bidimensional");
+		int[][] matrizResultado = new int[cantidad1raDimension][cantidad2daDimension];
+		for (int i = 0; i < matrizResultado.length; i++) {
+			for (int j = 0; j < matrizResultado[i].length; j++) {
+				matrizResultado[i][j] = FuncionesBasicas.peticionDeEnteros();
+			}
+		}
+		return matrizResultado;
+	}
+}

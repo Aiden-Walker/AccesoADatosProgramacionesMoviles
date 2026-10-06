@@ -1,0 +1,9 @@
+package ejTurnosEntre3;
+
+public class Unc {
+
+	public static void main(String[] args) {
+		SkibidiThread hilo1 = new SkibidiThread()
+	}
+
+}

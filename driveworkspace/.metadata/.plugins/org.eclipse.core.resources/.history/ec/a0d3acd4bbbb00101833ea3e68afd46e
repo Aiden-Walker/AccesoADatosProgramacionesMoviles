@@ -1,0 +1,22 @@
+package boletin2Tablas;
+
+import java.util.Scanner;
+
+import funcionesImportantes.FuncionesBasicasVarias;
+import funcionesImportantes.FuncionesTablas;
+
+public class Ejercicio7 {
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		int[][] alumnosYNotas = FuncionesTablas.matrizesBidimensionales(5, 3);
+		for (int iteradorj = 0; iteradorj < alumnosYNotas.length; iteradorj++) {
+			int sumaNotaTrimestral = 0;
+			for (int iteradori = 0; iteradori < alumnosYNotas.length; iteradori++) {
+				sumaNotaTrimestral += alumnosYNotas[iteradorj][iteradori];
+			}
+			float mediaTrimestral = FuncionesBasicasVarias.calculoDeMedia(sumaNotaTrimestral, alumnosYNotas[0].length);
+		}
+	}
+
+}

@@ -1,0 +1,95 @@
+package ejercicio2InterfacesGraficas;
+
+import java.util.*;
+
+public class Pokedex {
+	private LinkedList<Pokemon> listaPokemons;
+	private HashMap<Pokemon, LinkedList<Pokemon>> combates;
+	private Principal controlador;
+
+	public Pokedex(Principal controlador) {
+		this.controlador = controlador;
+		this.listaPokemons = new LinkedList<>();
+		this.combates = new HashMap<Pokemon, LinkedList<Pokemon>>();
+	}
+
+	public Pokemon getPok(String nombrePok) {
+		Pokemon pokToReturn = null;
+		for (Pokemon pok : this.listaPokemons) {
+			if (pok.getNombre().equals(nombrePok)) {
+				pokToReturn = pok;
+			}
+		}
+		return pokToReturn;
+	}
+
+	public boolean guardaPokemon(Pokemon pok) {
+		// devuelve true si se ha guardado realmente; false si ya estaba
+		boolean isInserted = false;
+		if (this.listaPokemons.add(pok)) {
+			isInserted = true;
+		}
+		return isInserted;
+	}
+
+	public LinkedList<Pokemon> getListaPokemons() {
+		return listaPokemons;
+	}
+
+	public void setListaPokemons(LinkedList<Pokemon> listaPokemons) {
+		this.listaPokemons = listaPokemons;
+	}
+
+	public HashMap<Pokemon, LinkedList<Pokemon>> getCombates() {
+		return combates;
+	}
+
+	public void setCombates(HashMap<Pokemon, LinkedList<Pokemon>> combates) {
+		this.combates = combates;
+	}
+
+	public void borraPokemon(String pok) {
+		Iterator<Pokemon> it = listaPokemons.iterator();
+		Pokemon keyAborrar = null;
+		while (it.hasNext()) {
+			if (it.next().getNombre().equals(pok)) {
+				it.remove();
+				for (Pokemon p : this.combates.keySet()) {
+					keyAborrar = p;
+				}
+			}
+			this.combates.remove(keyAborrar);
+		}
+	}
+
+	public boolean guardaCombate(String ganador, String perdedor) {
+		// TODO Auto-generated method stub
+		// false si ese combate ya estaba.
+		Pokemon winner = this.getPok(ganador);
+		Pokemon loser = this.getPok(perdedor);
+		return this.combates.get(winner).add(loser);
+	}
+
+	public String getListadoTodos() {
+		String info = "";
+		for (Pokemon pok : this.listaPokemons) {
+			info += pok.getNombre() + " (" + pok.getTipo() + ") " + pok.getGeneración() + ", "
+					+ pok.getEstadoEvolutivo() + " " + pok.getPuntos()+ "\n";
+		}
+		return info;
+	}
+
+	public String getListadoAlfabeticoMayores(int mínimo) {
+		LinkedList<Pokemon> sortedPokemons = new LinkedList<>();
+		Collections.sort(sortedPokemons);
+	}
+
+	public String getListadoMayores(int mínimo) {
+		// TODO Auto-generated method stub
+	}
+
+	public String getListadoCombates() {
+		// TODO Auto-generated method stub
+	}
+
+}

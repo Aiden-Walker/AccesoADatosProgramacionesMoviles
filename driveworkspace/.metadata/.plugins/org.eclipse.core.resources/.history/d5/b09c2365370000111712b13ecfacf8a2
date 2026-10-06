@@ -1,0 +1,19 @@
+package ejTurnosEntre3;
+
+public class SkibidiThread extends Thread {
+	String nombre;
+
+	public SkibidiThread(String nombre, IamTheOneWhoStops stopper) {
+		super();
+		this.nombre = nombre;
+		this.sayCheese = stopper;
+	}
+
+	IamTheOneWhoStops sayCheese;
+
+	public void run() {
+		for (int i = 0; i <= 10; i++) {
+			sayCheese.helloGuysWelcomeToMyMinecraftGameplay(nombre);
+		}
+	}
+}

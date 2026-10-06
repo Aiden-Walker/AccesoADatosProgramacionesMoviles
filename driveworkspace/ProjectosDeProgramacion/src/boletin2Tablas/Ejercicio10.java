@@ -1,0 +1,29 @@
+package boletin2Tablas;
+
+import java.util.Scanner;
+
+public class Ejercicio10 {
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		int[] tablaARellenarHoy = new int[5];
+		System.out.println(rellenaPares(tablaARellenarHoy));
+	}
+
+	public static int rellenaPares(int[] tablaRellenar) {
+		System.out.println("Vamos a crear una tabla");
+		int imparesDesechados = 0;
+		for (int i = 0; i < tablaRellenar.length;) {
+			System.out.println("Introduce un numero");
+			int numeroIntroducido = sc.nextInt();
+			if (numeroIntroducido % 2 == 0) {
+				tablaRellenar[i] = numeroIntroducido;
+				i++;
+			} else {
+				imparesDesechados++;
+			}
+		}
+		return imparesDesechados;
+	}
+
+}

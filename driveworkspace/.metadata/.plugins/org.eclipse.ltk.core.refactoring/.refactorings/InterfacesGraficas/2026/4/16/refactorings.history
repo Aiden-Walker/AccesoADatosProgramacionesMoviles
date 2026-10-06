@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;ejercicio2InterfacesGraficas.VentanaPpal_vacia.java&apos; to &apos;VentanaPpal.java&apos;&#x0D;&#x0A;- Original project: &apos;InterfacesGraficas&apos;&#x0D;&#x0A;- Original element: &apos;ejercicio2InterfacesGraficas.VentanaPpal_vacia.java&apos;&#x0D;&#x0A;- Renamed element: &apos;ejercicio2InterfacesGraficas.VentanaPpal.java&apos;" description="Rename compilation unit &apos;VentanaPpal_vacia.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;ejercicio2InterfacesGraficas{VentanaPpal_vacia.java" name="VentanaPpal.java" references="false" stamp="1776157440512" version="1.0"/>
+</session>
