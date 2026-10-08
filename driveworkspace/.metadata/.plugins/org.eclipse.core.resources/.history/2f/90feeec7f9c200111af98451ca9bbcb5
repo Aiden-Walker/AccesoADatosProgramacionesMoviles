@@ -1,0 +1,8 @@
+package ficherosXML;
+
+public class Receta {
+	String titulo;
+	Ingrediente[] ingredientes = new Ingrediente[2];
+	String procedimiento;
+	String tiempo;
+}
