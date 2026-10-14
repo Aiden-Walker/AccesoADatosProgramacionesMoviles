@@ -1,0 +1,18 @@
+package ficherosXML;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Cliente paco = new Cliente("Paquito");
+		Cliente menganito = new Cliente("Menganito");
+		Fecha paquifechainicio = new Fecha(12, 5, 2017);
+		Fecha paquifechafin = new Fecha(20, 9, 2017);
+		Fecha mengafechainicio = new Fecha(31, 10, 2025);
+		Fecha mengafechafin = new Fecha(5, 11, 2025);
+		Habitacion pacohabi = new Habitacion(1);
+		Habitacion menganihabi = new Habitacion(2);
+		Reserva pacoserva = new Reserva(paco, pacohabi, paquifechainicio, paquifechafin);
+		Hotel Hazbin = new Hotel();
+	}
+
+}

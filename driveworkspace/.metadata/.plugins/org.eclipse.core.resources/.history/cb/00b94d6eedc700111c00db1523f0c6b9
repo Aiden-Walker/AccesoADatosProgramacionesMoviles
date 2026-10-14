@@ -1,0 +1,52 @@
+package ficherosXML;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Hotel {
+
+	private List<Reserva> tReservas;
+
+	public Hotel() {
+		this.tReservas = new ArrayList<Reserva>();
+	}
+
+	public List<Reserva> gettReservas() {
+		return tReservas;
+	}
+
+	public void guardaClientesEnTXT(File ficheroClientes) {
+		try (BufferedWriter guardaClientesTXT = new BufferedWriter(new FileWriter(ficheroClientes))) {
+			for (Reserva re : this.tReservas) {
+				guardaClientesTXT.write(re.getCliente().getNombre());
+				guardaClientesTXT.newLine();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean cargarReservasDeFicheroBinario(File ficheroReservas) {
+
+		return false;
+	}
+
+	public void guardarReservasEnFicheroBinario(File ficheroReservas) {
+
+	}
+
+	public void guardarReservasEnFicheroXML(File ficheroXML) {
+
+	}
+
+	public static void mostrarReservasDeXML(File ficheroXML) {
+
+	}
+
+}
