@@ -1,0 +1,79 @@
+package ficherosXML;
+
+import java.io.Serializable;
+
+public class Fecha implements Comparable<Fecha>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int dia;
+	private int mes;
+	private int anyo;
+
+	public Fecha(int dia, int mes, int anyo) {
+		this.dia = dia;
+		this.mes = mes;
+		this.anyo = anyo;
+	}
+
+	public int getDia() {
+		return dia;
+	}
+
+	public void setDia(int dia) {
+		this.dia = dia;
+	}
+
+	public int getMes() {
+		return mes;
+	}
+
+	public void setMes(int mes) {
+		this.mes = mes;
+	}
+
+	public int getAnyo() {
+		return anyo;
+	}
+
+	public void setAnyo(int anyo) {
+		this.anyo = anyo;
+	}
+
+	@Override
+	public String toString() {
+		return "" + this.dia + "/" + this.mes + "/" + this.anyo;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fecha other = (Fecha) obj;
+		if (anyo != other.anyo)
+			return false;
+		if (dia != other.dia)
+			return false;
+		if (mes != other.mes)
+			return false;
+		return true;
+	}
+
+	@Override
+	public int compareTo(Fecha o) {
+		int res = this.anyo - o.anyo;
+
+		if (res == 0)
+			res = this.mes - o.mes;
+		if (res == 0)
+			res = this.dia - o.dia;
+
+		return res;
+	}
+
+}
