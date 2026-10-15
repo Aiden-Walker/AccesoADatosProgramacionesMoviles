@@ -11,7 +11,6 @@ INDEX VERSION 1.134+C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosPr
 1649036145.index
 75977997.index
 2266442320.index
-533541389.index
 1865797976.index
 4196612431.index
 3413269940.index
