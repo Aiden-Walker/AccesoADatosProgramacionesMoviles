@@ -71,24 +71,21 @@ public class Hotel implements Serializable {
 		DocumentBuilderFactory teFaltaFabrica = DocumentBuilderFactory.newInstance();
 		DocumentBuilder bobElConstructor;
 
-		try {
-			bobElConstructor = teFaltaFabrica.newDocumentBuilder();
+		bobElConstructor = teFaltaFabrica.newDocumentBuilder();
 
-			DOMImplementation implementacionOG = bobElConstructor.getDOMImplementation();
-			Document documentoDeAdecuadoTexto = implementacionOG.createDocument(null, "reservas", null);
-			documentoDeAdecuadoTexto.setXmlVersion("1.0");
+		DOMImplementation implementacionOG = bobElConstructor.getDOMImplementation();
+		Document documentoDeAdecuadoTexto = implementacionOG.createDocument(null, "reservas", null);
+		documentoDeAdecuadoTexto.setXmlVersion("1.0");
 
-			for (Reserva reReserva : this.tReservas) {
-				Element root /* Raiz en ingles no? */ = documentoDeAdecuadoTexto.createElement("reserva");
-				documentoDeAdecuadoTexto.getDocumentElement().appendChild(root);
-				/* Añadimos el cliente */
-				crearElementoXML("cliente", reReserva.getCliente().getNombre(), root, documentoDeAdecuadoTexto);
-				/* Ahora la habitacion */
-				crearElementoXML("habitacion", reReserva.getHabitación().getNumero(), root, documentoDeAdecuadoTexto);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		for (Reserva reReserva : this.tReservas) {
+			Element root /* Raiz en ingles no? */ = documentoDeAdecuadoTexto.createElement("reserva");
+			documentoDeAdecuadoTexto.getDocumentElement().appendChild(root);
+			/* Añadimos el cliente */
+			crearElementoXML("cliente", reReserva.getCliente().getNombre(), root, documentoDeAdecuadoTexto);
+			/* Ahora la habitacion */
+			crearElementoXML("habitacion", ""+reReserva.getHabitación().getNumero(), root, documentoDeAdecuadoTexto);
 		}
+
 	}
 
 	public void crearElementoXML(String datoAmeter, String funValue, Element rooty, Document documentito) {

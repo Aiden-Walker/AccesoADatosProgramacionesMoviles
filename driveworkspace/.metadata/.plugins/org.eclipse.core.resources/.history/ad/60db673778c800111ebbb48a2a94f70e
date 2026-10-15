@@ -1,0 +1,13 @@
+package ficherosXML;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+public class Ejercicio2 {
+
+	public static void main(String[] args) {
+		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
+		DocumentBuilder buildSkibidi = factoria.newDocumentBuilder();
+			
+
+}
