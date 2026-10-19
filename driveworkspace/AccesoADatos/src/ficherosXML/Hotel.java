@@ -1,10 +1,16 @@
 package ficherosXML;
 
 import java.io.*;
+import javax.xml.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import java.util.*;
 import javax.xml.parsers.*;
 
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 public class Hotel implements Serializable {
 
@@ -71,19 +77,45 @@ public class Hotel implements Serializable {
 		DocumentBuilderFactory teFaltaFabrica = DocumentBuilderFactory.newInstance();
 		DocumentBuilder bobElConstructor;
 
-		bobElConstructor = teFaltaFabrica.newDocumentBuilder();
+		try {
+			bobElConstructor = teFaltaFabrica.newDocumentBuilder();
+			DOMImplementation implementacionOG = bobElConstructor.getDOMImplementation();
+			Document documentoDeAdecuadoTexto = implementacionOG.createDocument(null, "reservas", null);
+			documentoDeAdecuadoTexto.setXmlVersion("1.0");
 
-		DOMImplementation implementacionOG = bobElConstructor.getDOMImplementation();
-		Document documentoDeAdecuadoTexto = implementacionOG.createDocument(null, "reservas", null);
-		documentoDeAdecuadoTexto.setXmlVersion("1.0");
+			for (Reserva reReserva : this.tReservas) {
+				Element root /* Raiz en ingles no? */ = documentoDeAdecuadoTexto.createElement("reserva");
+				documentoDeAdecuadoTexto.getDocumentElement().appendChild(root);
+				/* Añadimos el cliente */
+				crearElementoXML("cliente", reReserva.getCliente().getNombre(), root, documentoDeAdecuadoTexto);
+				/* Ahora la habitacion */
+				crearElementoXML("habitacion", "" + reReserva.getHabitación().getNumero(), root,
+						documentoDeAdecuadoTexto);
 
-		for (Reserva reReserva : this.tReservas) {
-			Element root /* Raiz en ingles no? */ = documentoDeAdecuadoTexto.createElement("reserva");
-			documentoDeAdecuadoTexto.getDocumentElement().appendChild(root);
-			/* Añadimos el cliente */
-			crearElementoXML("cliente", reReserva.getCliente().getNombre(), root, documentoDeAdecuadoTexto);
-			/* Ahora la habitacion */
-			crearElementoXML("habitacion", ""+reReserva.getHabitación().getNumero(), root, documentoDeAdecuadoTexto);
+				crearElementoXML("fechainicio", "", root, documentoDeAdecuadoTexto);
+				crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), root, documentoDeAdecuadoTexto);
+				crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), root, documentoDeAdecuadoTexto);
+				crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), root, documentoDeAdecuadoTexto);
+
+				crearElementoXML("fechafin", "", root, documentoDeAdecuadoTexto);
+				crearElementoXML("dia", "" + reReserva.getFechaFin().getDia(), root, documentoDeAdecuadoTexto);
+				crearElementoXML("mes", "" + reReserva.getFechaFin().getMes(), root, documentoDeAdecuadoTexto);
+				crearElementoXML("anyo", "" + reReserva.getFechaFin().getAnyo(), root, documentoDeAdecuadoTexto);
+			}
+			Source fuente = new DOMSource(documentoDeAdecuadoTexto);
+			Result resultado = new StreamResult(new java.io.File(ficheroXML.toString()));
+			Transformer transformador = TransformerFactory.newInstance().newTransformer();
+			transformador.transform(fuente, resultado);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		} catch (TransformerFactoryConfigurationError e) {
+
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -100,6 +132,48 @@ public class Hotel implements Serializable {
 	}
 
 	public static void mostrarReservasDeXML(File ficheroXML) {
+		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder buildSkibidi = factoria.newDocumentBuilder();
+			Document losPapeles = buildSkibidi.parse(new File("reservasHazbinXML.xml"));
+			losPapeles.getDocumentElement().normalize();
+			System.out.printf("Root element: %s %n", losPapeles.getDocumentElement().getNodeName());
+			NodeList reservas = losPapeles.getElementsByTagName("reserva");
+			System.out.printf("Reserve elements to run through: %d %n", reservas.getLength());
+			/* Time to run through the movies */
+			for (int i = 0; i < reservas.getLength(); i++) {
+				Node reservaActual = reservas.item(i);
+				if (reservaActual.getNodeType() == Node.ELEMENT_NODE) {
+					Element elementoskibidi = (Element) reservaActual;
+					System.out.printf("Cliente = %s %n",
+							elementoskibidi.getElementsByTagName("cliente").item(0).getTextContent());
+					System.out.printf("* Habitacion = %s %n",
+							elementoskibidi.getElementsByTagName("habitacion").item(0).getTextContent());
+					System.out.printf("* Dia = %s %n",
+							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
+					System.out.printf("* Mes = %s %n",
+							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
+					System.out.printf("* Anyo = %s %n",
+							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
+
+					System.out.printf("* Dia = %s %n",
+							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
+					System.out.printf("* Mes = %s %n",
+							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
+					System.out.printf("* Anyo = %s %n",
+							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
+				}
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
