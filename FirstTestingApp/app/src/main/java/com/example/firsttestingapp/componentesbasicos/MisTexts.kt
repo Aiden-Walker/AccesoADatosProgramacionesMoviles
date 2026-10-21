@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -17,6 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -92,6 +96,42 @@ fun MyTextFieldAppend(user: String, onUserChange: (String) -> Unit){
     TextField(
         value = user,
         onValueChange = {onUserChange(it)}
+    )
+}
+@Composable
+fun MyTextFieldParentPassword(modifier: Modifier) {
+    var password by remember { mutableStateOf("") }
+    Column(modifier) {
+        // Sintaxis habitual en Kotlin con lambda al final
+        MyPasswordTextField(password) {password = it}
+    }
+}
+@Composable
+fun MyPasswordTextField(
+    password: String,
+    onValueChange: (String) -> Unit
+) {
+    var passwordHidden by rememberSaveable { mutableStateOf(true) }
+    TextField(
+        value = password,
+        onValueChange = { onValueChange(it) },
+        singleLine = true,
+        label = { Text("Introduce tu contraseña") },
+        keyboardOptions = KeyboardOptions(
+            keyboardType =
+                KeyboardType.Password
+        ),
+        visualTransformation = if (passwordHidden)
+            PasswordVisualTransformation()
+        else
+            VisualTransformation.None,
+        trailingIcon = {
+            Text(
+                text = if (passwordHidden) "Mostrar" else "Ocultar",
+                modifier = Modifier.clickable { passwordHidden =
+                    !passwordHidden }
+            )
+        }
     )
 }
 /*
