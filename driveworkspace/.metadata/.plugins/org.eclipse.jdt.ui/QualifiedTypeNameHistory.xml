@@ -56,8 +56,8 @@
     <fullyQualifiedTypeName name="examen2EVJoseMiguelBarberoJimenez.Entity"/>
     <fullyQualifiedTypeName name="examen2EVJoseMiguelBarberoJimenez.Machine"/>
     <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
-    <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.EOFException"/>
     <fullyQualifiedTypeName name="ficherosXML.Ingrediente"/>
     <fullyQualifiedTypeName name="ficherosXML.Receta"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
 </qualifiedTypeNameHistroy>
