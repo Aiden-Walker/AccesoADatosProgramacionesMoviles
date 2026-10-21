@@ -43,6 +43,10 @@ public class Main {
 		File resHazbinBIN = new File("reservasHazbinbinarias.dat");
 		hazbin.guardarReservasEnFicheroBinario(resHazbinBIN);
 		hazbin.cargarReservasDeFicheroBinario(resHazbinBIN);
+
+		File resHazbinXML = new File("reservasHazbinXML.xml");
+		hazbin.guardarReservasEnFicheroXML(resHazbinXML);
+		Hotel.mostrarReservasDeXML(resHazbinXML);
 	}
 
 }

@@ -19,7 +19,7 @@ public class Ejercicio2 {
 		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder buildSkibidi = factoria.newDocumentBuilder();
-			Document losPapeles = buildSkibidi.parse(new File("Cine.xml"));
+			Document losPapeles = buildSkibidi.parse(new File("peliculas.xml"));
 			losPapeles.getDocumentElement().normalize();
 			System.out.printf("Root element: %s %n", losPapeles.getDocumentElement().getNodeName());
 			NodeList peliculas = losPapeles.getElementsByTagName("Pelicula");
@@ -29,7 +29,24 @@ public class Ejercicio2 {
 				Node peliActual = peliculas.item(i);
 				if (peliActual.getNodeType() == Node.ELEMENT_NODE) {
 					Element elementoskibidi = (Element) peliActual;
-					System.out.println();
+					System.out.printf("Titulo = %s %n",
+							elementoskibidi.getElementsByTagName("Titulo").item(0).getTextContent());
+					System.out.printf("* Duracion = %s %n",
+							elementoskibidi.getElementsByTagName("Duracion").item(0).getTextContent());
+					System.out.printf("* Genero = %s %n",
+							elementoskibidi.getElementsByTagName("Genero").item(0).getTextContent());
+					System.out.printf("* sinopsis = %s %n",
+							elementoskibidi.getElementsByTagName("sinopsis").item(0).getTextContent());
+					System.out.printf("* Actor = %s %n",
+							elementoskibidi.getElementsByTagName("Actor").item(0).getTextContent());
+					System.out.printf("* Actor = %s %n",
+							elementoskibidi.getElementsByTagName("Actor").item(0).getTextContent());
+					System.out.printf("* Actor = %s %n",
+							elementoskibidi.getElementsByTagName("Actor").item(0).getTextContent());
+					System.out.printf("* Fecha = %s %n",
+							elementoskibidi.getElementsByTagName("Fecha").item(0).getTextContent());
+					System.out.printf("* Director = %s %n",
+							elementoskibidi.getElementsByTagName("Director").item(0).getTextContent());
 				}
 			}
 		} catch (ParserConfigurationException e) {
