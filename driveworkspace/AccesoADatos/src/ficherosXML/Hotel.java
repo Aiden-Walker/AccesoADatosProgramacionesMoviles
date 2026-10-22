@@ -12,12 +12,8 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
-public class Hotel implements Serializable {
+public class Hotel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private List<Reserva> tReservas;
 
 	public Hotel() {
@@ -42,22 +38,23 @@ public class Hotel implements Serializable {
 	}
 
 	public boolean cargarReservasDeFicheroBinario(File ficheroReservas) {
-		boolean status = false;
-		try (ObjectInputStream objectIS = new ObjectInputStream(new FileInputStream(ficheroReservas))) {
-			status = true;
-			while (true) {
-				Reserva reActual = (Reserva) objectIS.readObject();
-				System.out.println(reActual);
+		boolean status = ficheroReservas.exists();
+		if (status) {
+			try (ObjectInputStream objectIS = new ObjectInputStream(new FileInputStream(ficheroReservas))) {
+				while (true) {
+					Reserva reActual = (Reserva) objectIS.readObject();
+					this.tReservas.add(reActual);
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("El archivo no se ha encontrado, porfavor intenta otro nombre");
+			} catch (EOFException e) {
+				System.out.println("El fin del archivo ha sido alcanzado");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (FileNotFoundException e) {
-			System.out.println("El archivo no se ha encontrado, porfavor intenta otro nombre");
-		} catch (EOFException e) {
-			System.out.println("El fin del archivo ha sido alcanzado");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return status;
 	}
@@ -67,8 +64,12 @@ public class Hotel implements Serializable {
 			for (Reserva remake : this.tReservas) {
 				objectOS.writeObject(remake);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -92,11 +93,16 @@ public class Hotel implements Serializable {
 				crearElementoXML("habitacion", "" + reReserva.getHabitación().getNumero(), root,
 						documentoDeAdecuadoTexto);
 
-				crearElementoXML("fechainicio", "", root, documentoDeAdecuadoTexto);
-				crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), root, documentoDeAdecuadoTexto);
-				crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), root, documentoDeAdecuadoTexto);
-				crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), root, documentoDeAdecuadoTexto);
-
+				Element eFI = documentoDeAdecuadoTexto.createElement("fechainicio");
+				Element eDia = crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), root,
+						documentoDeAdecuadoTexto);
+				eFI.appendChild(eDia);
+				Element eMes = crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), root,
+						documentoDeAdecuadoTexto);
+				Element eAnyo = crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), root,
+						documentoDeAdecuadoTexto);
+				eFI.appendChild(eMes);
+				eFI.appendChild(eAnyo);
 				crearElementoXML("fechafin", "", root, documentoDeAdecuadoTexto);
 				crearElementoXML("dia", "" + reReserva.getFechaFin().getDia(), root, documentoDeAdecuadoTexto);
 				crearElementoXML("mes", "" + reReserva.getFechaFin().getMes(), root, documentoDeAdecuadoTexto);
@@ -120,7 +126,7 @@ public class Hotel implements Serializable {
 
 	}
 
-	public void crearElementoXML(String datoAmeter, String funValue, Element rooty, Document documentito) {
+	public Element crearElementoXML(String datoAmeter, String funValue, Element rooty, Document documentito) {
 		/*
 		 * De verdad que siento las graciosadas por ejemplo en los nombres de las cosas
 		 * pero es que la cabeza me va a reventar
@@ -129,6 +135,7 @@ public class Hotel implements Serializable {
 		Text muchoTexto = documentito.createTextNode(funValue);
 		rooty.appendChild(elementomori);
 		elementomori.appendChild(muchoTexto);
+		return elementomori;
 	}
 
 	public static void mostrarReservasDeXML(File ficheroXML) {
@@ -149,13 +156,14 @@ public class Hotel implements Serializable {
 							elementoskibidi.getElementsByTagName("cliente").item(0).getTextContent());
 					System.out.printf("* Habitacion = %s %n",
 							elementoskibidi.getElementsByTagName("habitacion").item(0).getTextContent());
+					System.out.println("* Fecha de Inicio");
 					System.out.printf("* Dia = %s %n",
 							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
 					System.out.printf("* Mes = %s %n",
 							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
 					System.out.printf("* Anyo = %s %n",
 							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
-
+					System.out.println("* Fecha de Fin");
 					System.out.printf("* Dia = %s %n",
 							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
 					System.out.printf("* Mes = %s %n",

@@ -42,7 +42,8 @@ public class Main {
 
 		File resHazbinBIN = new File("reservasHazbinbinarias.dat");
 		hazbin.guardarReservasEnFicheroBinario(resHazbinBIN);
-		hazbin.cargarReservasDeFicheroBinario(resHazbinBIN);
+		skibidi.cargarReservasDeFicheroBinario(resHazbinBIN);
+		System.out.println(skibidi.gettReservas().toString());
 
 		File resHazbinXML = new File("reservasHazbinXML.xml");
 		hazbin.guardarReservasEnFicheroXML(resHazbinXML);
