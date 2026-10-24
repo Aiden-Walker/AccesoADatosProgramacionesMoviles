@@ -1,0 +1,53 @@
+package fichXMLSAX;
+
+import java.io.File;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Maquinista {
+	private String nombre;
+	private String dni;
+	private float sueldo;
+
+	public Maquinista() {
+		super();
+	}
+
+	public Maquinista(String nombre, String dni, float sueldo) {
+		super();
+		this.nombre = nombre;
+		this.dni = dni;
+		this.sueldo = sueldo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public float getSueldo() {
+		return sueldo;
+	}
+
+	public void setSueldo(float sueldo) {
+		this.sueldo = sueldo;
+	}
+
+	@Override
+	public String toString() {
+		return "Maquinista [nombre=" + nombre + ", dni=" + dni + ", sueldo=" + sueldo + "]";
+	}
+
+}

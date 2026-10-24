@@ -1,0 +1,65 @@
+package fichXMLSAX;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.*;
+
+import ficherosXML.Reserva;
+
+public class Tren {
+	private List<Vagon> vagones = new ArrayList<>();
+	private Maquinista maquinista;
+
+	public Tren() {
+		super();
+	}
+
+	public Tren(List<Vagon> vagones, Maquinista maquinista) {
+		super();
+		this.vagones = vagones;
+		this.maquinista = maquinista;
+	}
+
+	public Tren(Maquinista maquinista) {
+		super();
+		this.maquinista = maquinista;
+	}
+
+	public List<Vagon> getVagones() {
+		return vagones;
+	}
+
+	public void setVagones(List<Vagon> vagones) {
+		this.vagones = vagones;
+	}
+
+	public Maquinista getMaquinista() {
+		return maquinista;
+	}
+
+	public void setMaquinista(Maquinista maquinista) {
+		this.maquinista = maquinista;
+	}
+
+	public void addVagon(Vagon vagon) {
+		this.vagones.add(vagon);
+	}
+
+	public void guardarVagonesEnFicheroBinario(File ficheroVagones) {
+		try (ObjectOutputStream objectOS = new ObjectOutputStream(new FileOutputStream(ficheroVagones))) {
+			for (Vagon theWagon : this.vagones) {
+				objectOS.writeObject(theWagon);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

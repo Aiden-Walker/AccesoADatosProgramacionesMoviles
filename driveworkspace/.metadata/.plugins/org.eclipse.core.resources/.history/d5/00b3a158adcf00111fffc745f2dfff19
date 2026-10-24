@@ -1,0 +1,45 @@
+package fichXMLSAX;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class GestionContenido extends DefaultHandler {
+
+	// Una bandera para cada campo que quieras filtrar
+	private boolean bCapacidad = false;
+	private boolean bMercancia = false;
+
+	@Override
+	public void startElement(String uri, String nombre, String nombreC, Attributes atts) {
+		if (nombreC.equalsIgnoreCase("capacidad-max")) {
+			bCapacidad = true;
+		} else if (nombreC.equalsIgnoreCase("mercancia")) {
+			bMercancia = true;
+		}
+	}
+
+	@Override
+	public void endElement(String uri, String nombre, String nombreC) {
+		if (nombreC.equalsIgnoreCase("capacidad-max")) {
+			bCapacidad = false;
+		} else if (nombreC.equalsIgnoreCase("mercancia")) {
+			bMercancia = false;
+		}
+	}
+
+	@Override
+	public void characters(char[] ch, int inicio, int longitud) {
+		String car = new String(ch, inicio, longitud);
+		car = car.replaceAll("[\t\n]", "").trim();
+
+		if (!car.isEmpty()) {
+			// Preguntamos qué bandera está encendida para saber qué estamos imprimiendo
+			if (bCapacidad) {
+				System.out.println("CAPACIDAD = " + car);
+			} else if (bMercancia) {
+				System.out.println("MERCANCIA = " + car);
+			}
+		}
+	}}
+}

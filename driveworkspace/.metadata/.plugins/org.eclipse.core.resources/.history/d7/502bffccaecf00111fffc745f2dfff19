@@ -1,0 +1,22 @@
+package fichXMLSAX;
+
+import java.io.File;
+
+public class AppTrenes {
+
+	public static void main(String[] args) {
+
+		Maquinista maquinista = new Maquinista("Pepe", "11111111L", 1200);
+		Tren tren = new Tren(maquinista);
+		tren.addVagon(new Vagon(1000, 200, "oro"));
+		tren.addVagon(new Vagon(900, 800, "incienso"));
+		tren.addVagon(new Vagon(300, 300, "mirra"));
+		File vagonesBinariosFich = new File("VagonesBinarios.dat");
+		tren.guardarVagonesEnFicheroBinario(vagonesBinariosFich);
+		Maquinista maquinoncio = new Maquinista("Manolo", "11111111H", 1500);
+		Tren tren2 = new Tren(maquinoncio);
+		tren2.cargarVagonesDeFicheroBinario(vagonesBinariosFich);
+		System.out.println(tren2.getVagones().toString());
+	}
+
+}

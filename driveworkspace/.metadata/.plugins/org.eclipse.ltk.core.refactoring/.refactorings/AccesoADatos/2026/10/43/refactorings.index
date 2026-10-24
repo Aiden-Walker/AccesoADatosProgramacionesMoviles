@@ -1,2 +1,3 @@
 1792439504933	Rename local variable 'peliculas'
 1792439518809	Rename local variable 'peliActual'
+1792848505711	Rename method 'guardarReservasEnFicheroXML'

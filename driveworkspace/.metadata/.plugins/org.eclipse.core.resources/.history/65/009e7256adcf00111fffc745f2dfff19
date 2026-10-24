@@ -1,0 +1,95 @@
+package fichXMLSAX;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public class GestionContenido extends DefaultHandler {
+
+	// Una bandera para cada campo que quieras filtrar
+	private boolean bCapacidad = false;
+	private boolean bMercancia = false;
+
+	@Override
+	public void startElement(String uri, String nombre, String nombreC, Attributes atts) {
+		if (nombreC.equalsIgnoreCase("capacidad-max")) {
+			bCapacidad = true;
+		} else if (nombreC.equalsIgnoreCase("mercancia")) {
+			bMercancia = true;
+		}
+	}
+
+	@Override
+	public void endElement(String uri, String nombre, String nombreC) {
+		if (nombreC.equalsIgnoreCase("capacidad-max")) {
+			bCapacidad = false;
+		} else if (nombreC.equalsIgnoreCase("mercancia")) {
+			bMercancia = false;
+		}
+	}
+
+	@Override
+	public void characters(char[] ch, int inicio, int longitud) {
+		String car = new String(ch, inicio, longitud);
+		car = car.replaceAll("[\t\n]", "").trim();
+
+		if (!car.isEmpty()) {
+			// Preguntamos qué bandera está encendida para saber qué estamos imprimiendo
+			if (bCapacidad) {
+				System.out.println("CAPACIDAD = " + car);
+			} else if (bMercancia) {
+				System.out.println("MERCANCIA = " + car);
+			}
+		}
+	}}
+
+	Sin filtros:
+
+	public class GestionContenidoTodo extends DefaultHandler {
+
+		@Override
+		public void startElement(String uri, String nombre, String nombreC, Attributes atts) {
+			// Imprime el nombre de cada etiqueta conforme se va abriendo
+			System.out.printf("Principio Elemento: %s %n", nombre);
+		}
+
+		@Override
+		public void endElement(String uri, String nombre, String nombreC) {
+			// Imprime cuando se cierra la etiqueta
+			System.out.printf("Fin Elemento: %s %n", nombre);
+		}
+
+		@Override
+		public void characters(char[] ch, int inicio, int longitud) {
+			String car = new String(ch, inicio, longitud);
+			car = car.replaceAll("[\t\n]", "").trim();
+
+			// Imprime cualquier texto que encuentre por el camino
+			if (!car.isEmpty()) {
+				System.out.printf("Caracteres: %s %n", car);
+			}
+		}
+	}
+
+	Metodo para
+	llamar a
+	la clase
+
+	public void mostrarMercanciaDeXMLSAX(File ficheroXML) {
+		try {
+
+			SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+			parserFactory.setNamespaceAware(true);
+			SAXParser parser = parserFactory.newSAXParser();
+			XMLReader procesadorXML = parser.getXMLReader();
+
+			GestionContenido gestor = new GestionContenido();
+			procesadorXML.setContentHandler(gestor);
+
+			InputSource fileXML = new InputSource(new FileInputStream(ficheroXML));
+			procesadorXML.parse(fileXML);
+
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
+		}
+}
