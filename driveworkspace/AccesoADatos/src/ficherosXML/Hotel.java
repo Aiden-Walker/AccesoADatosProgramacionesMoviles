@@ -94,19 +94,27 @@ public class Hotel {
 						documentoDeAdecuadoTexto);
 
 				Element eFI = documentoDeAdecuadoTexto.createElement("fechainicio");
-				Element eDia = crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), root,
+				root.appendChild(eFI);
+				Element eDia = crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), eFI,
 						documentoDeAdecuadoTexto);
 				eFI.appendChild(eDia);
-				Element eMes = crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), root,
+				Element eMes = crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), eFI,
 						documentoDeAdecuadoTexto);
-				Element eAnyo = crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), root,
+				Element eAnyo = crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), eFI,
 						documentoDeAdecuadoTexto);
 				eFI.appendChild(eMes);
 				eFI.appendChild(eAnyo);
-				crearElementoXML("fechafin", "", root, documentoDeAdecuadoTexto);
-				crearElementoXML("dia", "" + reReserva.getFechaFin().getDia(), root, documentoDeAdecuadoTexto);
-				crearElementoXML("mes", "" + reReserva.getFechaFin().getMes(), root, documentoDeAdecuadoTexto);
-				crearElementoXML("anyo", "" + reReserva.getFechaFin().getAnyo(), root, documentoDeAdecuadoTexto);
+				Element eFF = documentoDeAdecuadoTexto.createElement("fechafin");
+				root.appendChild(eFF);
+				Element eFFDia = crearElementoXML("dia", "" + reReserva.getFechaFin().getDia(), eFF,
+						documentoDeAdecuadoTexto);
+				eFF.appendChild(eFFDia);
+				Element eFFMes = crearElementoXML("mes", "" + reReserva.getFechaFin().getMes(), eFF,
+						documentoDeAdecuadoTexto);
+				eFF.appendChild(eFFMes);
+				Element eFFAnyo = crearElementoXML("anyo", "" + reReserva.getFechaFin().getAnyo(), eFF,
+						documentoDeAdecuadoTexto);
+				eFF.appendChild(eFFAnyo);
 			}
 			Source fuente = new DOMSource(documentoDeAdecuadoTexto);
 			Result resultado = new StreamResult(new java.io.File(ficheroXML.toString()));
@@ -139,10 +147,10 @@ public class Hotel {
 	}
 
 	public static void mostrarReservasDeXML(File ficheroXML) {
-		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		try {
+			DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 			DocumentBuilder buildSkibidi = factoria.newDocumentBuilder();
-			Document losPapeles = buildSkibidi.parse(new File("reservasHazbinXML.xml"));
+			Document losPapeles = buildSkibidi.parse(ficheroXML);
 			losPapeles.getDocumentElement().normalize();
 			System.out.printf("Root element: %s %n", losPapeles.getDocumentElement().getNodeName());
 			NodeList reservas = losPapeles.getElementsByTagName("reserva");
@@ -157,19 +165,18 @@ public class Hotel {
 					System.out.printf("* Habitacion = %s %n",
 							elementoskibidi.getElementsByTagName("habitacion").item(0).getTextContent());
 					System.out.println("* Fecha de Inicio");
+					Element fechaInicio = (Element) elementoskibidi.getElementsByTagName("fechainicio").item(0);
 					System.out.printf("* Dia = %s %n",
-							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
+							fechaInicio.getElementsByTagName("dia").item(0).getTextContent());
 					System.out.printf("* Mes = %s %n",
-							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
+							fechaInicio.getElementsByTagName("mes").item(0).getTextContent());
 					System.out.printf("* Anyo = %s %n",
-							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
+							fechaInicio.getElementsByTagName("anyo").item(0).getTextContent());
 					System.out.println("* Fecha de Fin");
-					System.out.printf("* Dia = %s %n",
-							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
-					System.out.printf("* Mes = %s %n",
-							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
-					System.out.printf("* Anyo = %s %n",
-							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
+					Element fechaFin = (Element) elementoskibidi.getElementsByTagName("fechafin").item(0);
+					System.out.printf("* Dia = %s %n", fechaFin.getElementsByTagName("dia").item(0).getTextContent());
+					System.out.printf("* Mes = %s %n", fechaFin.getElementsByTagName("mes").item(0).getTextContent());
+					System.out.printf("* Anyo = %s %n", fechaFin.getElementsByTagName("anyo").item(0).getTextContent());
 				}
 			}
 		} catch (ParserConfigurationException e) {

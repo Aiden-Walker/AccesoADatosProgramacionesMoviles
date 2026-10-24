@@ -1,0 +1,190 @@
+package ficherosXML;
+
+import java.io.*;
+import javax.xml.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import java.util.*;
+import javax.xml.parsers.*;
+
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+public class Hotel {
+
+	private List<Reserva> tReservas;
+
+	public Hotel() {
+		this.tReservas = new ArrayList<Reserva>();
+	}
+
+	public List<Reserva> gettReservas() {
+		return tReservas;
+	}
+
+	public void guardaClientesEnTXT(File ficheroClientes) {
+		try (BufferedWriter guardaClientesTXT = new BufferedWriter(new FileWriter(ficheroClientes))) {
+			for (Reserva re : this.tReservas) {
+				guardaClientesTXT.write(re.getCliente().getNombre());
+				guardaClientesTXT.newLine();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public boolean cargarReservasDeFicheroBinario(File ficheroReservas) {
+		boolean status = ficheroReservas.exists();
+		if (status) {
+			try (ObjectInputStream objectIS = new ObjectInputStream(new FileInputStream(ficheroReservas))) {
+				while (true) {
+					Reserva reActual = (Reserva) objectIS.readObject();
+					this.tReservas.add(reActual);
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("El archivo no se ha encontrado, porfavor intenta otro nombre");
+			} catch (EOFException e) {
+				System.out.println("El fin del archivo ha sido alcanzado");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return status;
+	}
+
+	public void guardarReservasEnFicheroBinario(File ficheroReservas) {
+		try (ObjectOutputStream objectOS = new ObjectOutputStream(new FileOutputStream(ficheroReservas))) {
+			for (Reserva remake : this.tReservas) {
+				objectOS.writeObject(remake);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarReservasEnFicheroXML(File ficheroXML) {
+		Scanner sc = new Scanner(System.in);
+		DocumentBuilderFactory teFaltaFabrica = DocumentBuilderFactory.newInstance();
+		DocumentBuilder bobElConstructor;
+
+		try {
+			bobElConstructor = teFaltaFabrica.newDocumentBuilder();
+			DOMImplementation implementacionOG = bobElConstructor.getDOMImplementation();
+			Document documentoDeAdecuadoTexto = implementacionOG.createDocument(null, "reservas", null);
+			documentoDeAdecuadoTexto.setXmlVersion("1.0");
+
+			for (Reserva reReserva : this.tReservas) {
+				Element root /* Raiz en ingles no? */ = documentoDeAdecuadoTexto.createElement("reserva");
+				documentoDeAdecuadoTexto.getDocumentElement().appendChild(root);
+				/* Añadimos el cliente */
+				crearElementoXML("cliente", reReserva.getCliente().getNombre(), root, documentoDeAdecuadoTexto);
+				/* Ahora la habitacion */
+				crearElementoXML("habitacion", "" + reReserva.getHabitación().getNumero(), root,
+						documentoDeAdecuadoTexto);
+
+				Element eFI = documentoDeAdecuadoTexto.createElement("fechainicio");
+				Element eDia = crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), root,
+						documentoDeAdecuadoTexto);
+				eFI.appendChild(eDia);
+				Element eMes = crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), root,
+						documentoDeAdecuadoTexto);
+				Element eAnyo = crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), root,
+						documentoDeAdecuadoTexto);
+				eFI.appendChild(eMes);
+				eFI.appendChild(eAnyo);
+				Element eFF = documentoDeAdecuadoTexto.createElement("fechafin");
+				Element eFFDia = crearElementoXML("dia", "" + reReserva.getFechaFin().getDia(), root,
+						documentoDeAdecuadoTexto);
+
+				crearElementoXML("mes", "" + reReserva.getFechaFin().getMes(), root, documentoDeAdecuadoTexto);
+				crearElementoXML("anyo", "" + reReserva.getFechaFin().getAnyo(), root, documentoDeAdecuadoTexto);
+			}
+			Source fuente = new DOMSource(documentoDeAdecuadoTexto);
+			Result resultado = new StreamResult(new java.io.File(ficheroXML.toString()));
+			Transformer transformador = TransformerFactory.newInstance().newTransformer();
+			transformador.transform(fuente, resultado);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		} catch (TransformerFactoryConfigurationError e) {
+
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public Element crearElementoXML(String datoAmeter, String funValue, Element rooty, Document documentito) {
+		/*
+		 * De verdad que siento las graciosadas por ejemplo en los nombres de las cosas
+		 * pero es que la cabeza me va a reventar
+		 */
+		Element elementomori = documentito.createElement(datoAmeter);
+		Text muchoTexto = documentito.createTextNode(funValue);
+		rooty.appendChild(elementomori);
+		elementomori.appendChild(muchoTexto);
+		return elementomori;
+	}
+
+	public static void mostrarReservasDeXML(File ficheroXML) {
+		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder buildSkibidi = factoria.newDocumentBuilder();
+			Document losPapeles = buildSkibidi.parse(new File("reservasHazbinXML.xml"));
+			losPapeles.getDocumentElement().normalize();
+			System.out.printf("Root element: %s %n", losPapeles.getDocumentElement().getNodeName());
+			NodeList reservas = losPapeles.getElementsByTagName("reserva");
+			System.out.printf("Reserve elements to run through: %d %n", reservas.getLength());
+			/* Time to run through the movies */
+			for (int i = 0; i < reservas.getLength(); i++) {
+				Node reservaActual = reservas.item(i);
+				if (reservaActual.getNodeType() == Node.ELEMENT_NODE) {
+					Element elementoskibidi = (Element) reservaActual;
+					System.out.printf("Cliente = %s %n",
+							elementoskibidi.getElementsByTagName("cliente").item(0).getTextContent());
+					System.out.printf("* Habitacion = %s %n",
+							elementoskibidi.getElementsByTagName("habitacion").item(0).getTextContent());
+					System.out.println("* Fecha de Inicio");
+					System.out.printf("* Dia = %s %n",
+							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
+					System.out.printf("* Mes = %s %n",
+							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
+					System.out.printf("* Anyo = %s %n",
+							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
+					System.out.println("* Fecha de Fin");
+					System.out.printf("* Dia = %s %n",
+							elementoskibidi.getElementsByTagName("dia").item(0).getTextContent());
+					System.out.printf("* Mes = %s %n",
+							elementoskibidi.getElementsByTagName("mes").item(0).getTextContent());
+					System.out.printf("* Anyo = %s %n",
+							elementoskibidi.getElementsByTagName("anyo").item(0).getTextContent());
+				}
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}
