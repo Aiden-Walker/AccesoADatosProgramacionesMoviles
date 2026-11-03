@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     )*/
                     //MyTextFieldCorrect(modifier = Modifier.padding( paddingValues = innerPadding))
                     MyTextFieldParentPassword(modifier = Modifier.padding( paddingValues = innerPadding))
+
                 }
             }
         }
