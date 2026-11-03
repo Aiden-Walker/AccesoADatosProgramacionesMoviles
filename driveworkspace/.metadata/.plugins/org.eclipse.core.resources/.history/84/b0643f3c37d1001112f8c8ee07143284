@@ -1,0 +1,44 @@
+package u1.examen25102026.fuentes;
+
+public class Evaluacion{
+
+    private String codigoModelo;
+    private String nombreBenchmark;
+    private double puntuacion;
+
+    public Evaluacion(String codigoModelo, String nombreBenchmark, double puntuacion) {
+        this.codigoModelo = codigoModelo;
+        this.nombreBenchmark = nombreBenchmark;
+        this.puntuacion = puntuacion;
+    }
+
+    public String getCodigoModelo() {
+        return codigoModelo;
+    }
+
+    public void setCodigoModelo(String codigoModelo) {
+        this.codigoModelo = codigoModelo;
+    }
+
+    public String getNombreBenchmark() {
+        return nombreBenchmark;
+    }
+
+    public void setNombreBenchmark(String nombreBenchmark) {
+        this.nombreBenchmark = nombreBenchmark;
+    }
+
+    public double getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(double puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + codigoModelo + "] " + nombreBenchmark + ": " + puntuacion + "%";
+    }
+
+}

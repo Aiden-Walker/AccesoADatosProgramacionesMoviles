@@ -1,0 +1,180 @@
+package examenU1_26_10_2026;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import ficherosXML.Reserva;
+
+public class Modelo {
+	private Map<String, ModeloIA> catalogoModelos = new HashMap<>();
+	private List<Evaluacion> evaluaciones = new ArrayList<>();
+
+	public Modelo() {
+		super();
+	}
+
+	public Map<String, ModeloIA> getCatalogoModelos() {
+		return catalogoModelos;
+	}
+
+	public List<Evaluacion> getEvaluaciones() {
+		return evaluaciones;
+	}
+
+	public boolean addModeloIA(ModeloIA modelo) {
+		if (!catalogoModelos.containsKey(modelo.getCodigo())) {
+			catalogoModelos.put(modelo.getCodigo(), modelo);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean removeModeloIAByCodigo(String codigo) {
+		return catalogoModelos.remove(codigo) != null;
+	}
+
+	public void addEvaluacion(Evaluacion evaluacion) {
+		evaluaciones.add(evaluacion);
+	}
+
+	public int obtenerNumErrores() {
+		int numErrores = 0;
+		for (Evaluacion ev : evaluaciones) {
+			if (!catalogoModelos.containsKey(ev.getCodigoModelo())) {
+				numErrores++;
+			}
+		}
+		return numErrores;
+	}
+
+	// a) Gestión del log de errores
+	public boolean creaArchivoErrores() {
+		boolean status = false;
+		int x = this.obtenerNumErrores();
+		if (x > 0) {
+			status = true;
+			File archivoErrores = new File("errores.log");
+			try (BufferedWriter escritorArchivo = new BufferedWriter(new FileWriter(archivoErrores))) {
+				escritorArchivo.write("Hay " + x + " evaluaciones asociadas a modelos no registrados en el catalogo");
+				escritorArchivo.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			File deleteameEsta = new File("errores.log");
+			deleteameEsta.delete();
+			/*
+			 * No sabia de que otra manera borrarlo aparte de crear de nuevo el archivo y
+			 * hacer que se implode a si mismo vaya
+			 */
+		}
+		return status; // Implementación pendiente
+	}
+
+	// b) Carga de modelos desde XML (DOM)
+	public int addModelosDeXML(String nombreFichero) {
+		int modelsAdded = 0;
+		try {
+			DocumentBuilderFactory factoryDeDocumentos = DocumentBuilderFactory.newInstance();
+			DocumentBuilder constructorDeDocumentos = factoryDeDocumentos.newDocumentBuilder();
+			Document documento = constructorDeDocumentos.parse(nombreFichero);
+			documento.getDocumentElement().normalize();
+			System.out.printf("Root element: %s %n", documento.getDocumentElement().getNodeName());
+			NodeList clankers = documento.getElementsByTagName("modelo");
+			/*
+			 * Clanker es un adjetivo despectivo usado para referirse a las inteligencias
+			 * artificiales, lo siento Marta, la IA no me gusta nada, por muchos motivos
+			 */
+			for (int i = 0; i < clankers.getLength(); i++) {
+				Node clankerActual = clankers.item(i);
+				if (clankerActual.getNodeType() == Node.ELEMENT_NODE) {
+					Element elementoModeloActual = (Element) clankerActual;
+					String codigo = elementoModeloActual.getElementsByTagName("codigo").item(0).getTextContent();
+					String nombre = elementoModeloActual.getElementsByTagName("nombre").item(0).getTextContent();
+					String proveedor = elementoModeloActual.getElementsByTagName("proveedor").item(0).getTextContent();
+					ModeloIA modeloActual = new ModeloIA(codigo, nombre, proveedor);
+					if (!this.catalogoModelos.containsKey(modeloActual.getCodigo())) {
+						this.catalogoModelos.put(modeloActual.getCodigo(), modeloActual);
+						modelsAdded++;
+					}
+				}
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return modelsAdded; // Implementación pendiente
+	}
+
+	// c) // 3. Lectura de archivo de texto plano
+	public int addEvaluacionesDeTexto(String nombreFichero) {
+		int evaluacionesLeidas = 0;
+		try {
+			BufferedReader lectorEvaluaciones = new BufferedReader(new FileReader(new File(nombreFichero)));
+			String[] modeloActual = lectorEvaluaciones.readLine().split(";");
+			ModeloIA novaModelo = new ModeloIA(modeloActual[0],modeloActual[1],modeloActual[2]);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return evaluacionesLeidas; // Implementación pendiente
+	}
+
+	// d) Guardar evaluaciones en binario
+	public void escribirEvaluacionesEnBinario(String nombreFichero) {
+		// Implementación pendiente
+	}
+
+	// e) Leer evaluaciones desde binario
+	public ArrayList<Evaluacion> leerEvaluacionesDeBinario(String nombreFichero) {
+
+		return null; // Implementación pendiente
+	}
+
+	// f) Exportar evaluaciones a XML
+	public void generaXMLEvaluaciones(String nombreFichero) {
+		// Implementación pendiente
+	}
+
+}

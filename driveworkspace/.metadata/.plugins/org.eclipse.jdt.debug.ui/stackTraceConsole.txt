@@ -1,0 +1,9 @@
+		try (BufferedWriter guardaClientesTXT = new BufferedWriter(new FileWriter(ficheroClientes))) {
+			for (Reserva re : this.tReservas) {
+				guardaClientesTXT.write(re.getCliente().getNombre());
+				guardaClientesTXT.newLine();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}

@@ -1,0 +1,293 @@
+package examenU1_26_10_2026;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
+
+import ficherosXML.Reserva;
+
+public class Modelo {
+	private Map<String, ModeloIA> catalogoModelos = new HashMap<>();
+	private List<Evaluacion> evaluaciones = new ArrayList<>();
+
+	public Modelo() {
+		super();
+	}
+
+	public Map<String, ModeloIA> getCatalogoModelos() {
+		return catalogoModelos;
+	}
+
+	public List<Evaluacion> getEvaluaciones() {
+		return evaluaciones;
+	}
+
+	public boolean addModeloIA(ModeloIA modelo) {
+		if (!catalogoModelos.containsKey(modelo.getCodigo())) {
+			catalogoModelos.put(modelo.getCodigo(), modelo);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean removeModeloIAByCodigo(String codigo) {
+		return catalogoModelos.remove(codigo) != null;
+	}
+
+	public void addEvaluacion(Evaluacion evaluacion) {
+		evaluaciones.add(evaluacion);
+	}
+
+	public int obtenerNumErrores() {
+		int numErrores = 0;
+		for (Evaluacion ev : evaluaciones) {
+			if (!catalogoModelos.containsKey(ev.getCodigoModelo())) {
+				numErrores++;
+			}
+		}
+		return numErrores;
+	}
+
+	// a) Gestión del log de errores
+	public boolean creaArchivoErrores() {
+		boolean status = false;
+		int x = this.obtenerNumErrores();
+		if (x > 0) {
+			status = true;
+			File archivoErrores = new File("errores.log");
+			try (BufferedWriter escritorArchivo = new BufferedWriter(new FileWriter(archivoErrores))) {
+				escritorArchivo.write("Hay " + x + " evaluaciones asociadas a modelos no registrados en el catalogo");
+				escritorArchivo.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			File deleteameEsta = new File("errores.log");
+			deleteameEsta.delete();
+			/*
+			 * No sabia de que otra manera borrarlo aparte de crear de nuevo el archivo y
+			 * hacer que se implode a si mismo vaya
+			 */
+		}
+		return status; // Implementación pendiente
+	}
+
+	// b) Carga de modelos desde XML (DOM)
+	public int addModelosDeXML(String nombreFichero) {
+		int modelsAdded = 0;
+		try {
+			DocumentBuilderFactory factoryDeDocumentos = DocumentBuilderFactory.newInstance();
+			DocumentBuilder constructorDeDocumentos = factoryDeDocumentos.newDocumentBuilder();
+			Document documento = constructorDeDocumentos.parse(nombreFichero);
+			documento.getDocumentElement().normalize();
+			System.out.printf("Root element: %s %n", documento.getDocumentElement().getNodeName());
+			NodeList clankers = documento.getElementsByTagName("modelo");
+			/*
+			 * Clanker es un adjetivo despectivo usado para referirse a las inteligencias
+			 * artificiales, lo siento Marta, la IA no me gusta nada, por muchos motivos
+			 */
+			for (int i = 0; i < clankers.getLength(); i++) {
+				Node clankerActual = clankers.item(i);
+				if (clankerActual.getNodeType() == Node.ELEMENT_NODE) {
+					Element elementoModeloActual = (Element) clankerActual;
+					String codigo = elementoModeloActual.getElementsByTagName("codigo").item(0).getTextContent();
+					String nombre = elementoModeloActual.getElementsByTagName("nombre").item(0).getTextContent();
+					String proveedor = elementoModeloActual.getElementsByTagName("proveedor").item(0).getTextContent();
+					ModeloIA modeloActual = new ModeloIA(codigo, nombre, proveedor);
+					if (!this.catalogoModelos.containsKey(modeloActual.getCodigo())) {
+						this.catalogoModelos.put(modeloActual.getCodigo(), modeloActual);
+						modelsAdded++;
+					}
+				}
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return modelsAdded; // Implementación pendiente
+	}
+
+	// c) // 3. Lectura de archivo de texto plano
+	public int addEvaluacionesDeTexto(String nombreFichero) {
+		int evaluacionesLeidas = 0;
+		File ficheroALeer = new File(nombreFichero);
+		try (FileReader fr = new FileReader(ficheroALeer)) {
+			BufferedReader br = new BufferedReader(fr);
+			String line = br.readLine();
+			while (line != null) {
+				String[] resultadoSplit = line.split(";");
+				double puntuacion = Double.parseDouble(resultadoSplit[2]);
+				Evaluacion evaActual = new Evaluacion(resultadoSplit[0], resultadoSplit[1], puntuacion);
+				if (this.evaluaciones.add(evaActual)) {
+					evaluacionesLeidas++;
+				}
+				line = br.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return evaluacionesLeidas; // Implementación pendiente
+	}
+
+	// d) Guardar evaluaciones en binario
+	public void escribirEvaluacionesEnBinario(String nombreFichero) {
+		// Implementación pendiente
+		File lasEvaluacionesBinarioEdition = new File(nombreFichero);
+		try (ObjectOutputStream objectOS = new ObjectOutputStream(
+				new FileOutputStream(lasEvaluacionesBinarioEdition))) {
+			for (Evaluacion clankValuation : this.evaluaciones) {
+				objectOS.writeObject(clankValuation);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// e) Leer evaluaciones desde binario
+	public ArrayList<Evaluacion> leerEvaluacionesDeBinario(String nombreFichero) {
+		File ficheroEvaluaciones = new File(nombreFichero);
+		boolean status = ficheroEvaluaciones.exists();
+		ArrayList<Evaluacion> listaDeEvaluaciones = new ArrayList<>();
+		if (status) {
+			try (ObjectInputStream objectIS = new ObjectInputStream(new FileInputStream(ficheroEvaluaciones))) {
+				while (true) {
+					Evaluacion evaActual = (Evaluacion) objectIS.readObject();
+					listaDeEvaluaciones.add(evaActual);
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("El archivo no se ha encontrado, porfavor intenta otro nombre");
+			} catch (EOFException e) {
+				System.out.println("El fin del archivo ha sido alcanzado");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return listaDeEvaluaciones; // Implementación pendiente
+	}
+
+	// f) Exportar evaluaciones a XML
+	public void generaXMLEvaluaciones(String nombreFichero) {
+		DocumentBuilderFactory teFaltaFabrica = DocumentBuilderFactory.newInstance();
+		DocumentBuilder bobElConstructor;
+
+		try {
+			bobElConstructor = teFaltaFabrica.newDocumentBuilder();
+			DOMImplementation implementacionOG = bobElConstructor.getDOMImplementation();
+			Document documentoDeAdecuadoTexto = implementacionOG.createDocument(null, "reservas", null);
+			documentoDeAdecuadoTexto.setXmlVersion("1.0");
+
+			for (Reserva reReserva : this.tReservas) {
+				Element root /* Raiz en ingles no? */ = documentoDeAdecuadoTexto.createElement("reserva");
+				documentoDeAdecuadoTexto.getDocumentElement().appendChild(root);
+				/* Añadimos el cliente */
+				crearElementoXML("cliente", reReserva.getCliente().getNombre(), root, documentoDeAdecuadoTexto);
+				/* Ahora la habitacion */
+				crearElementoXML("habitacion", "" + reReserva.getHabitación().getNumero(), root,
+						documentoDeAdecuadoTexto);
+
+				Element eFI = documentoDeAdecuadoTexto.createElement("fechainicio");
+				root.appendChild(eFI);
+				Element eDia = crearElementoXML("dia", "" + reReserva.getFechaInicio().getDia(), eFI,
+						documentoDeAdecuadoTexto);
+				eFI.appendChild(eDia);
+				Element eMes = crearElementoXML("mes", "" + reReserva.getFechaInicio().getMes(), eFI,
+						documentoDeAdecuadoTexto);
+				Element eAnyo = crearElementoXML("anyo", "" + reReserva.getFechaInicio().getAnyo(), eFI,
+						documentoDeAdecuadoTexto);
+				eFI.appendChild(eMes);
+				eFI.appendChild(eAnyo);
+				Element eFF = documentoDeAdecuadoTexto.createElement("fechafin");
+				root.appendChild(eFF);
+				Element eFFDia = crearElementoXML("dia", "" + reReserva.getFechaFin().getDia(), eFF,
+						documentoDeAdecuadoTexto);
+				eFF.appendChild(eFFDia);
+				Element eFFMes = crearElementoXML("mes", "" + reReserva.getFechaFin().getMes(), eFF,
+						documentoDeAdecuadoTexto);
+				eFF.appendChild(eFFMes);
+				Element eFFAnyo = crearElementoXML("anyo", "" + reReserva.getFechaFin().getAnyo(), eFF,
+						documentoDeAdecuadoTexto);
+				eFF.appendChild(eFFAnyo);
+			}
+			Source fuente = new DOMSource(documentoDeAdecuadoTexto);
+			Result resultado = new StreamResult(new java.io.File(ficheroXML.toString()));
+			Transformer transformador = TransformerFactory.newInstance().newTransformer();
+			transformador.transform(fuente, resultado);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		} catch (TransformerFactoryConfigurationError e) {
+
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Implementación pendiente
+	}
+
+	public Element crearElementoXML(String datoAmeter, String funValue, Element rooty, Document documentito) {
+		/*
+		 * De verdad que siento las graciosadas por ejemplo en los nombres de las cosas
+		 * pero es que la cabeza me va a reventar
+		 */
+		Element elementomori = documentito.createElement(datoAmeter);
+		Text muchoTexto = documentito.createTextNode(funValue);
+		rooty.appendChild(elementomori);
+		elementomori.appendChild(muchoTexto);
+		return elementomori;
+	}
+}

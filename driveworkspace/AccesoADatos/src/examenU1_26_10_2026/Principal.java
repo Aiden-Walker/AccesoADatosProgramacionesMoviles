@@ -1,0 +1,58 @@
+package examenU1_26_10_2026;
+
+public class Principal {
+
+	private Modelo modelo;
+
+	public static void main(String[] args) {
+		new Principal();
+	}
+
+	public Principal() {
+		this.modelo = new Modelo();
+
+		this.addDatosDePrueba();
+
+		// a) Test errores
+		System.out.println("Hay errores (debe salir false): " + this.modelo.creaArchivoErrores());
+		this.modelo.removeModeloIAByCodigo("CW25B"); // Provocamos un error retirando el modelo
+		System.out.println("Hay errores (debe salir true): " + this.modelo.creaArchivoErrores());
+
+		// b) Lectura XML
+		System.out.println(
+				"Añadidos (deben salir 3)" + this.modelo.addModelosDeXML("modelos.xml") + " modelos de modelos.xml");
+		System.out.println("Catálogo tras carga XML: " + this.modelo.getCatalogoModelos().values());
+
+		// c) Lectura Fichero Texto Plano (Nuevo)
+		System.out.println("Leídas " + this.modelo.addEvaluacionesDeTexto("evaluaciones.txt")
+				+ " evaluaciones del fichero evaluaciones.txt");
+		System.out.println("Evaluaciones actuales: " + this.modelo.getEvaluaciones());
+
+		// d) Escritura binario
+		this.modelo.escribirEvaluacionesEnBinario("evaluaciones.dat");
+		System.out.println("Generado 'evaluaciones.dat'.");
+
+		// e) Lectura binario
+		System.out.println(
+				"Evaluaciones leídas de binario: " + this.modelo.leerEvaluacionesDeBinario("evaluaciones.dat"));
+
+		// f) Generación XML
+		this.modelo.generaXMLEvaluaciones("evaluaciones.xml");
+		System.out.println("Generado 'evaluaciones.xml'.");
+	}
+
+	private void addDatosDePrueba() {
+		ModeloIA m1 = new ModeloIA("LL370B", "LLaMA 3 70B", "Meta");
+		ModeloIA m2 = new ModeloIA("GEM15P", "Gemini 1.5 Pro", "Google");
+		ModeloIA m3 = new ModeloIA("CW25B", "Command R+", "Cohere");
+
+		this.modelo.addModeloIA(m1);
+		this.modelo.addModeloIA(m2);
+		this.modelo.addModeloIA(m3);
+
+		this.modelo.addEvaluacion(new Evaluacion("LL370B", "MMLU", 82.0));
+		this.modelo.addEvaluacion(new Evaluacion("LL370B", "HumanEval", 81.7));
+		this.modelo.addEvaluacion(new Evaluacion("GEM15P", "MATH-500", 67.7));
+		this.modelo.addEvaluacion(new Evaluacion("CW25B", "GSM8K", 75.0));
+	}
+}

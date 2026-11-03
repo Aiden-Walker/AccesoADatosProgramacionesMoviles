@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelos>
+    <modelo>
+        <codigo>GPT4O</codigo>
+        <nombre>GPT-4 Omni</nombre>
+        <proveedor>OpenAI</proveedor>
+    </modelo>
+    <modelo>
+        <codigo>CL35S</codigo>
+        <nombre>Claude 3.5 Sonnet</nombre>
+        <proveedor>Anthropic</proveedor>
+    </modelo>
+    <modelo>
+        <codigo>DSK3V</codigo>
+        <nombre>DeepSeek V3</nombre>
+        <proveedor>DeepSeek</proveedor>
+    </modelo>
+</modelos>

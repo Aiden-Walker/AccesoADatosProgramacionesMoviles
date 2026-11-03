@@ -1,0 +1,60 @@
+package examenU1_26_10_2026;
+
+import java.util.Objects;
+
+public class ModeloIA {
+
+	private String codigo;
+	private String nombre;
+	private String proveedor;
+
+	public ModeloIA(String codigo, String nombre, String proveedor) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.proveedor = proveedor;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(String proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null || getClass() != obj.getClass())
+			return false;
+		ModeloIA other = (ModeloIA) obj;
+		return Objects.equals(codigo, other.codigo);
+	}
+
+	@Override
+	public String toString() {
+		return nombre + " (" + proveedor + ")";
+	}
+}

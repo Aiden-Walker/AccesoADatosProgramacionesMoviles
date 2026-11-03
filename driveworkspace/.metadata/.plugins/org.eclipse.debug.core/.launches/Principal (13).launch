@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/AccesoADatos/src/examenU1_26_10_2026/Principal.java"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="1"/>
+    </listAttribute>
+    <stringAttribute key="org.eclipse.debug.core.terminate.timestamp" value="1793100186201"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="examenU1_26_10_2026.Principal"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="AccesoADatos"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="AccesoADatos"/>
+</launchConfiguration>
