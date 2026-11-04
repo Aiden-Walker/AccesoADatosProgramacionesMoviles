@@ -29,6 +29,7 @@ import com.example.firsttestingapp.componentesbasicos.MyPasswordTextField
 import com.example.firsttestingapp.componentesbasicos.MyStateHoisting
 import com.example.firsttestingapp.componentesbasicos.MyTextFieldCorrect
 import com.example.firsttestingapp.componentesbasicos.MyTextFieldParentPassword
+import com.example.firsttestingapp.progressindicators.MyLinearProgressIndicator
 import com.example.firsttestingapp.ui.theme.FirstTestingAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,8 +46,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     )*/
                     //MyTextFieldCorrect(modifier = Modifier.padding( paddingValues = innerPadding))
-                    MyTextFieldParentPassword(modifier = Modifier.padding( paddingValues = innerPadding))
-
+                    //MyTextFieldParentPassword(modifier = Modifier.padding(paddingValues = innerPadding))
+                    MyLinearProgressIndicator(modifier = Modifier.padding(paddingValues = innerPadding))
                 }
             }
         }
