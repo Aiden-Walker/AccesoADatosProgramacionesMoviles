@@ -398,3 +398,42 @@
 2026-11-05 10:13:42.148: [INFO] BookmarksLoadDropped droppedNodes=0
 2026-11-05 10:13:42.148: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
 2026-11-05 10:18:10.058: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:19:29.359: [INFO] CurrentProfilePath: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:19:29.359: [INFO] Profiles total count: 1
+2026-11-10 11:19:29.359: [INFO] Profile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-05T10:18:09.783Z
+2026-11-10 11:19:29.359: [INFO] LastUsedProfileDir: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:19:29.359: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-05T10:18:09.783Z
+2026-11-10 11:19:29.359: [INFO] OnDoneLoading sync enabled: 0
+2026-11-10 11:19:29.359: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-10 11:19:29.359: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-10 11:19:29.359: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:21:56.553: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:24:49.223: [INFO] CurrentProfilePath: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:24:49.223: [INFO] Profiles total count: 1
+2026-11-10 11:24:49.223: [INFO] Profile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T11:21:53.477Z
+2026-11-10 11:24:49.223: [INFO] LastUsedProfileDir: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:24:49.223: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T11:21:53.477Z
+2026-11-10 11:24:49.223: [INFO] OnDoneLoading sync enabled: 0
+2026-11-10 11:24:49.223: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-10 11:24:49.223: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-10 11:24:49.223: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:25:58.524: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:27:31.609: [INFO] CurrentProfilePath: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:27:31.609: [INFO] Profiles total count: 1
+2026-11-10 11:27:31.609: [INFO] Profile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T11:21:53.477Z
+2026-11-10 11:27:31.609: [INFO] LastUsedProfileDir: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:27:31.609: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T11:21:53.477Z
+2026-11-10 11:27:31.609: [INFO] OnDoneLoading sync enabled: 0
+2026-11-10 11:27:31.609: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-10 11:27:31.609: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-10 11:27:31.609: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:27:39.642: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-11-10 11:27:49.460: [INFO] CurrentProfilePath: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:27:49.460: [INFO] Profiles total count: 1
+2026-11-10 11:27:49.460: [INFO] Profile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T11:27:39.386Z
+2026-11-10 11:27:49.460: [INFO] LastUsedProfileDir: C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default
+2026-11-10 11:27:49.460: [INFO] MostRecentlyActiveProfile: name=Perfil 1 path=C:\Users\usuario\Desktop\REPO-Prog-Mov-ADatos\AccesoADatosProgramacionesMoviles\driveworkspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default lastActive=2026-11-10T11:27:39.386Z
+2026-11-10 11:27:49.460: [INFO] OnDoneLoading sync enabled: 0
+2026-11-10 11:27:49.460: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-11-10 11:27:49.460: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-11-10 11:27:49.460: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

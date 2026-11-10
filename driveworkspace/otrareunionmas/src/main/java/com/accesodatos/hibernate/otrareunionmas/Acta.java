@@ -1,0 +1,22 @@
+package com.accesodatos.hibernate.otrareunionmas;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "acta")
+public class Acta {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	private String contenido;
+	@OneToOne
+	@JoinColumn
+	private Reunion reunion;
+}
