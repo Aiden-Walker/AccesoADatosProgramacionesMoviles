@@ -140,3 +140,6 @@
 {"logTime": "1116/122134", "session": "START"}
 {"logTime": "1116/122134", "level": "INFO", "location": "chrome\\browser\\sessions\\session_service_log.cc:326 EdgeLogSessionServiceMessage", "message": "SessionServiceEvent: kStart - {\r\n   \"crashed\": false,\r\n   \"type\": 0\r\n}\r\n"}
 {"logTime": "1116/122142", "session": "END"}
+{"logTime": "1117/111547", "session": "START"}
+{"logTime": "1117/111547", "level": "INFO", "location": "chrome\\browser\\sessions\\session_service_log.cc:326 EdgeLogSessionServiceMessage", "message": "SessionServiceEvent: kStart - {\r\n   \"crashed\": false,\r\n   \"type\": 0\r\n}\r\n"}
+{"logTime": "1117/111554", "session": "END"}

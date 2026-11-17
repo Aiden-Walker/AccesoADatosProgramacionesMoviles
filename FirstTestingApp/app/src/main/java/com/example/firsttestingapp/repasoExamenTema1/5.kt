@@ -1,4 +1,4 @@
-package tema3
+package repasoExamenTema1
 
 import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 /*
 import coil3.compose.AsyncImage
 */
-import com.example.myapplication.R
+//import com.example.myapplication.R
 
 
 
