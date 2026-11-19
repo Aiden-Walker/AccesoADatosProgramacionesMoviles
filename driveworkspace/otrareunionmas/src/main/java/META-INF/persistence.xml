@@ -6,7 +6,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/otrareunionmas?zeroDateTimeBehavior=convertToNull&amp;serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="otrareunionmas"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="otrareunionmas"/>
+      <property name="javax.persistence.jdbc.password" value="OtraReunionMas"/>
       
       <!--update:el propio hibernate se encargará de actualizar la bd si hacemos cambios por código-->
       <property name="javax.persistence.schema-generation.database.action" value="update"/>
