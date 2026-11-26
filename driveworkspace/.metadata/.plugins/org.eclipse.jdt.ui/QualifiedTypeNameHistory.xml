@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.sun.imageio.spi.OutputStreamImageOutputStreamSpi"/>
-    <fullyQualifiedTypeName name="java.util.Collection"/>
-    <fullyQualifiedTypeName name="examenProgramacionColleciones.Vivienda"/>
-    <fullyQualifiedTypeName name="java.util.Iterator"/>
-    <fullyQualifiedTypeName name="java.lang.IndexOutOfBoundsException"/>
     <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
     <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="examenU1_26_10_2026.Evaluacion"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="veterinario.dao.AbstractDao"/>
+    <fullyQualifiedTypeName name="veterinario.dominio.Propietario"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="veterinario.dominio.Mascota"/>
+    <fullyQualifiedTypeName name="veterinario.dominio.Tratamiento"/>
 </qualifiedTypeNameHistroy>

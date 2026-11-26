@@ -1,0 +1,107 @@
+Un @ManyToMany no puede guardar columnas extra. La solución es crear una entidad intermedia (en tu examen, Prestamo) que tenga:
+
+un @ManyToOne hacia cada lado,
+los campos extra,
+una clave primaria compuesta formada por las dos FK.
+
+Y en cada lado original (Usuario, Ejemplar) pones un @OneToMany(mappedBy=...) hacia la entidad intermedia.
+
+Usuario 1 ──── N Prestamo N ──── 1 Ejemplar
+                (fechas extra)
+Paso a paso (con @IdClass, que es lo que ya tienes)
+
+1. Clase de la clave compuesta. Los atributos se llaman igual que los @Id de Prestamo, pero con el tipo del id de la otra entidad (int):
+
+java
+public class PrestamoId implements Serializable {
+    private int usuario;
+    private int ejemplar;
+
+    public PrestamoId() {}
+    public PrestamoId(int usuario, int ejemplar) { ... }
+
+    // hashCode y equals con los dos campos
+}
+
+2. Entidad intermedia. Cada @ManyToOne lleva también @Id, y añades las columnas extra:
+
+java
+@Entity
+@Table(name = "prestamo")
+@IdClass(PrestamoId.class)
+public class Prestamo implements Serializable {
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "ejemplar_id")
+    private Ejemplar ejemplar;
+
+    @Column(name = "fecha_prestamo")
+    private LocalDateTime fechaPrestamo;
+
+    @Column(name = "fecha_devolucion")
+    private LocalDateTime fechaDevolucion;
+}
+
+3. Lado inverso en cada entidad original. Sin cascade si guardas con el EntityManager compartido:
+
+java
+// en Usuario
+@OneToMany(mappedBy = "usuario")
+private List<Prestamo> prestamos;
+
+// en Ejemplar
+@OneToMany(mappedBy = "ejemplar")
+private List<Prestamo> prestamos;
+
+El mappedBy es el nombre del atributo en Prestamo (usuario, ejemplar).
+
+4. Métodos add/remove/contains en ambos lados, para mantener la bidireccionalidad, como ya hiciste.
+
+Alternativa: @EmbeddedId + @MapsId
+
+Es lo que usa tu compañero. Cambia solo la forma de la clave:
+
+java
+@Embeddable
+public class PrestamoId implements Serializable {
+    private int usuarioId;
+    private int ejemplarId;
+    // constructor vacío, equals, hashCode
+}
+
+@Entity
+public class Prestamo implements Serializable {
+    @EmbeddedId
+    private PrestamoId id = new PrestamoId();
+
+    @ManyToOne @MapsId("usuarioId")
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    @ManyToOne @MapsId("ejemplarId")
+    @JoinColumn(name = "ejemplar_id")
+    private Ejemplar ejemplar;
+
+    // fechas
+}
+
+Los nombres dentro de @MapsId("...") deben coincidir con los atributos de PrestamoId.
+
+Cuándo usar cada una
+	@IdClass	@EmbeddedId
+Atributos de la clave	Se repiten en la entidad (usuario, ejemplar)	Dentro de un objeto id
+Nombres en la clase clave	Iguales a los @Id de la entidad	Los que cites en @MapsId
+Búsqueda con find	new PrestamoId(usuarioId, ejemplarId)	Igual, con el @Embeddable
+
+Ambas generan la misma tabla. Tu profesora no ve esto en las diapositivas, así que en el examen usa la que mejor controles. Con @IdClass, tal como lo tienes, funciona.
+
+Reglas que no debes olvidar
+La clave debe ser Serializable y tener equals/hashCode.
+Guarda Usuario y Ejemplar antes de crear el Prestamo.
+Si no usas cascade, guarda el préstamo con su propio DAO (prestamoDao.save(p)), con el EntityManager compartido.
